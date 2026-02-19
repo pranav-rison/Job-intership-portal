@@ -2,7 +2,147 @@
 
 {% block title %}Jobs{% endblock %}
 
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/jobs.css' %}">
+{% endblock %}
+
 {% block content %}
-<h2>Available Jobs</h2>
-<p>Job listings will appear here.</p>
+
+<div class="jobs-header">
+	<h2>Browse Jobs</h2>
+	<p style="color: #64748B; margin: 0;">1,250+ opportunities waiting for you</p>
+</div>
+
+<div class="jobs-filter-bar">
+	<input type="text" placeholder="Job title or keyword...">
+	<select>
+		<option>All Locations</option>
+		<option>Remote</option>
+		<option>New York</option>
+		<option>San Francisco</option>
+		<option>London</option>
+	</select>
+	<select>
+		<option>All Levels</option>
+		<option>Entry Level</option>
+		<option>Mid-Level</option>
+		<option>Senior</option>
+	</select>
+	<button>Search</button>
+</div>
+
+<div class="jobs-layout">
+	<div>
+		<!-- Job Card 1 -->
+		<div class="job-card">
+			<div class="job-meta">
+				<span><strong>TechCorp Inc.</strong></span>
+				<span>Remote</span>
+				<span>Full-Time</span>
+			</div>
+			<h3 class="job-title">Senior Software Engineer</h3>
+			<p style="color: #64748B; margin: 0.75rem 0;">Build scalable cloud infrastructure with our AI-focused team using Python, Kubernetes, and AWS.</p>
+			<div class="job-tags">
+				<span class="job-tag">Python</span>
+				<span class="job-tag">AWS</span>
+				<span class="job-tag">Kubernetes</span>
+				<span class="job-tag">$120k-150k</span>
+			</div>
+			<div class="job-apply">
+				<span style="color: #64748B;">Posted 2 days ago</span>
+				<a href="/application/apply/">Apply Now</a>
+			</div>
+		</div>
+
+		<!-- Job Card 2 -->
+		<div class="job-card">
+			<div class="job-meta">
+				<span><strong>DataFlow Systems</strong></span>
+				<span>San Francisco, CA</span>
+				<span>Full-Time</span>
+			</div>
+			<h3 class="job-title">Machine Learning Engineer</h3>
+			<p style="color: #64748B; margin: 0.75rem 0;">Join our ML team to develop cutting-edge data science models and pipelines for Fortune 500 clients.</p>
+			<div class="job-tags">
+				<span class="job-tag">TensorFlow</span>
+				<span class="job-tag">PyTorch</span>
+				<span class="job-tag">SQL</span>
+				<span class="job-tag">$130k-170k</span>
+			</div>
+			<div class="job-apply">
+				<span style="color: #64748B;">Posted 5 days ago</span>
+				<a href="/application/apply/">Apply Now</a>
+			</div>
+		</div>
+
+		<!-- Job Card 3 -->
+		<div class="job-card">
+			<div class="job-meta">
+				<span><strong>DesignStudio Co.</strong></span>
+				<span>New York, NY</span>
+				<span>Contract</span>
+			</div>
+			<h3 class="job-title">Frontend Developer (React)</h3>
+			<p style="color: #64748B; margin: 0.75rem 0;">Create engaging user interfaces for web apps using React, TypeScript, and modern web technologies.</p>
+			<div class="job-tags">
+				<span class="job-tag">React</span>
+				<span class="job-tag">TypeScript</span>
+				<span class="job-tag">Tailwind CSS</span>
+				<span class="job-tag">$100k-125k</span>
+			</div>
+			<div class="job-apply">
+				<span style="color: #64748B;">Posted 1 week ago</span>
+				<a href="/application/apply/">Apply Now</a>
+			</div>
+		</div>
+
+		<!-- Job Card 4 -->
+		<div class="job-card">
+			<div class="job-meta">
+				<span><strong>CloudNine Solutions</strong></span>
+				<span>Remote</span>
+				<span>Full-Time</span>
+			</div>
+			<h3 class="job-title">DevOps Engineer</h3>
+			<p style="color: #64748B; margin: 0.75rem 0;">Manage cloud infrastructure, CI/CD pipelines, and deployment systems for our global platform.</p>
+			<div class="job-tags">
+				<span class="job-tag">Docker</span>
+				<span class="job-tag">Terraform</span>
+				<span class="job-tag">Jenkins</span>
+				<span class="job-tag">$110k-140k</span>
+			</div>
+			<div class="job-apply">
+				<span style="color: #64748B;">Posted 3 days ago</span>
+				<a href="/application/apply/">Apply Now</a>
+			</div>
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<div>
+		<div class="jobs-sidebar">
+			<h4>Top Companies</h4>
+			<ul class="sidebar-list">
+				<li><strong>TechCorp Inc.</strong> <span>120 roles</span></li>
+				<li><strong>DataFlow Systems</strong> <span>85 roles</span></li>
+				<li><strong>DesignStudio Co.</strong> <span>45 roles</span></li>
+				<li><strong>CloudNine Solutions</strong> <span>60 roles</span></li>
+				<li><strong>StartupHub</strong> <span>32 roles</span></li>
+			</ul>
+		</div>
+
+		<div class="jobs-sidebar" style="margin-top: 1.5rem;">
+			<h4>Popular Skills</h4>
+			<ul class="sidebar-list">
+				<li><strong>Python</strong> <span>420+ jobs</span></li>
+				<li><strong>JavaScript</strong> <span>380+ jobs</span></li>
+				<li><strong>AWS</strong> <span>290+ jobs</span></li>
+				<li><strong>React</strong> <span>360+ jobs</span></li>
+				<li><strong>SQL</strong> <span>310+ jobs</span></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
 {% endblock %}

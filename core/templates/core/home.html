@@ -2,9 +2,90 @@
 
 {% block title %}Home - Find Your Dream Job{% endblock %}
 
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="hero">
-    <h1>Find Your Dream Job Today</h1>
-    <p>Explore thousands of job opportunities with all the information you need.</p>
-</div>
+<section class="home-hero">
+    <div>
+        <h1>Find Your Dream Job Today</h1>
+        <p>Explore thousands of curated roles across engineering, design, data, and business. Apply faster with clean listings and a focused experience.</p>
+    </div>
+    <form class="home-search" method="get" action="/jobs/">
+        <input type="text" name="q" placeholder="Job title or keyword">
+        <select name="location">
+            <option value="">Any location</option>
+            <option>Remote</option>
+            <option>New York</option>
+            <option>San Francisco</option>
+            <option>India</option>
+        </select>
+        <button type="submit">Search Jobs</button>
+    </form>
+</section>
+
+<section class="home-stats">
+    <div class="stat-card">
+        <h3>12K+</h3>
+        <span>Open roles</span>
+    </div>
+    <div class="stat-card">
+        <h3>4K+</h3>
+        <span>Hiring companies</span>
+    </div>
+    <div class="stat-card">
+        <h3>92%</h3>
+        <span>Positive feedback</span>
+    </div>
+    <div class="stat-card">
+        <h3>24h</h3>
+        <span>Average response</span>
+    </div>
+</section>
+
+<h2 class="section-title">Popular Categories</h2>
+<section class="category-grid">
+    <div class="category-card">
+        <strong>Software Engineer</strong>
+        <span>1,200+ roles</span>
+    </div>
+    <div class="category-card">
+        <strong>AI/ML Engineer</strong>
+        <span>640+ roles</span>
+    </div>
+    <div class="category-card">
+        <strong>Product Manager</strong>
+        <span>430+ roles</span>
+    </div>
+    <div class="category-card">
+        <strong>UI/UX Designer</strong>
+        <span>320+ roles</span>
+    </div>
+</section>
+
+<h2 class="section-title">Why JobView</h2>
+<section class="feature-grid">
+    <div class="feature-card">
+        <h4>Smart Matching</h4>
+        <p>See roles tailored to your skills, location, and desired compensation.</p>
+    </div>
+    <div class="feature-card">
+        <h4>Verified Listings</h4>
+        <p>Every job is reviewed so you can apply confidently.</p>
+    </div>
+    <div class="feature-card">
+        <h4>Fast Apply</h4>
+        <p>Save time with a unified application flow across companies.</p>
+    </div>
+</section>
+
+<section class="home-cta">
+    <div>
+        <h3>Ready to start your next role?</h3>
+        <p>Join thousands of professionals advancing their careers with JobView.</p>
+    </div>
+    <a href="/users/register/">Create Account</a>
+</section>
 {% endblock %}

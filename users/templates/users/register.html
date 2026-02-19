@@ -3,248 +3,66 @@
 {% block title %}Register - JobViewWebsite{% endblock %}
 
 {% block extra_css %}
-<style>
-    .register-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: calc(100vh - 200px);
-        padding: 2rem 1rem;
-    }
-
-    .register-form {
-        background: #FFFFFF;
-        border-radius: 12px;
-        padding: 3rem 2.5rem;
-        box-shadow: 0 10px 40px rgba(30, 58, 138, 0.15);
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .register-form h2 {
-        text-align: center;
-        color: #1E3A8A;
-        margin-bottom: 0.5rem;
-        font-size: 2rem;
-        font-weight: 700;
-    }
-
-    .register-form p {
-        text-align: center;
-        color: #666;
-        margin-bottom: 2rem;
-        font-size: 0.95rem;
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 0.75rem;
-        color: #333;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    .form-group input,
-    .form-group select {
-        width: 100%;
-        padding: 0.875rem 1rem;
-        border: 2px solid #E5E7EB;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #FFFFFF;
-        color: #333;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-        outline: none;
-        border-color: #3B82F6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        background-color: #F0F9FF;
-    }
-
-    .form-group input::placeholder {
-        color: #999;
-    }
-
-    .form-group select {
-        cursor: pointer;
-        appearance: none;
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: right 0.75rem center;
-        background-size: 1.5em 1.5em;
-        padding-right: 2.5rem;
-    }
-
-    .form-group select option {
-        padding: 0.5rem;
-        color: #333;
-        background-color: #FFFFFF;
-    }
-
-    .register-btn {
-        width: 100%;
-        padding: 1rem;
-        background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
-        color: #FFFFFF;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 1.5rem;
-    }
-
-    .register-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(30, 58, 138, 0.3);
-    }
-
-    .register-btn:active {
-        transform: translateY(0);
-    }
-
-    .register-footer {
-        text-align: center;
-        margin-top: 2rem;
-        padding-top: 2rem;
-        border-top: 1px solid #E5E7EB;
-    }
-
-    .register-footer p {
-        color: #666;
-        margin-bottom: 0.5rem;
-    }
-
-    .register-footer a {
-        color: #3B82F6;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-
-    .register-footer a:hover {
-        color: #1E3A8A;
-        text-decoration: underline;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .register-form {
-            padding: 2rem 1.5rem;
-        }
-
-        .register-form h2 {
-            font-size: 1.5rem;
-        }
-
-        .register-container {
-            min-height: auto;
-            padding: 2rem 1rem;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .register-form {
-            padding: 1.5rem 1rem;
-            border-radius: 10px;
-        }
-
-        .register-form h2 {
-            font-size: 1.3rem;
-        }
-
-        .form-group input,
-        .form-group select {
-            padding: 0.75rem 0.75rem;
-            font-size: 0.95rem;
-        }
-    }
-</style>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 
 {% block content %}
+
 <div class="register-container">
-    <div class="register-form">
-        <h2>Create Account</h2>
-        <p>Register to start your job search journey</p>
-
-        <form method="POST">
-            {% csrf_token %}
-
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    placeholder="Enter your full name"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    placeholder="Enter your email"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    placeholder="Enter your password"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="occupation">Occupation</label>
-                <select id="occupation" name="occupation" required>
-                    <option value="">-- Select Your Occupation --</option>
-                    <option value="Software Engineer">Software Engineer</option>
-                    <option value="AI/ML Engineer">AI/ML Engineer</option>
-                    <option value="Data Scientist">Data Scientist</option>
-                    <option value="Web Developer">Web Developer</option>
-                    <option value="Full Stack Developer">Full Stack Developer</option>
-                    <option value="Frontend Developer">Frontend Developer</option>
-                    <option value="Backend Developer">Backend Developer</option>
-                    <option value="DevOps Engineer">DevOps Engineer</option>
-                    <option value="Cloud Engineer">Cloud Engineer</option>
-                    <option value="Database Administrator">Database Administrator</option>
-                    <option value="QA Engineer">QA Engineer</option>
-                    <option value="Product Manager">Product Manager</option>
-                    <option value="UI/UX Designer">UI/UX Designer</option>
-                    <option value="Network Engineer">Network Engineer</option>
-                    <option value="Security Engineer">Security Engineer</option>
-                    <option value="Business Analyst">Business Analyst</option>
-                    <option value="System Administrator">System Administrator</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <button type="submit" class="register-btn">Create Account</button>
-        </form>
-
-        <div class="register-footer">
-            <p>Already have an account? <a href="/users/login/">Login here</a></p>
-            <p><a href="/">Back to Home</a></p>
+    <form class="register-form" method="POST">
+        {% csrf_token %}
+        <h2><i class="fas fa-user-plus"></i> Create Your Account</h2>
+        
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
         </div>
-    </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="occupation">Current Role/Occupation</label>
+            <select id="occupation" name="occupation" required>
+                <option value="">Select your occupation...</option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="AI/ML Engineer">AI/ML Engineer</option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+                <option value="Cloud Architect">Cloud Architect</option>
+                <option value="UI/UX Designer">UI/UX Designer</option>
+                <option value="Product Manager">Product Manager</option>
+                <option value="Business Analyst">Business Analyst</option>
+                <option value="Project Manager">Project Manager</option>
+                <option value="QA Engineer">QA Engineer</option>
+                <option value="Security Engineer">Security Engineer</option>
+                <option value="Database Administrator">Database Administrator</option>
+                <option value="System Administrator">System Administrator</option>
+                <option value="Network Engineer">Network Engineer</option>
+                <option value="Student">Student</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-arrow-right"></i> Create Account
+        </button>
+
+        <div class="form-footer">
+            <p>Already have an account? <a href="/users/login/">Login here</a></p>
+            <p><a href="/" style="color: #64748B;">Back to Home</a></p>
+        </div>
+    </form>
 </div>
+
 {% endblock %}
