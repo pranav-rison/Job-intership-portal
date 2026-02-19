@@ -85,10 +85,10 @@
             left: 50%;
             width: 0;
             height: 2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #FFFFFF;
             transition: all 0.3s ease;
             transform: translateX(-50%);
-        }#FFFFFF
+        }
 
         .nav-link:hover {
             color: white !important;
@@ -166,6 +166,69 @@
 
         .container {
             max-width: 1200px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 3rem;
+            padding: 2.5rem 0 2rem;
+            background: #0F172A;
+            color: #E2E8F0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-text {
+            color: #CBD5F5;
+            line-height: 1.6;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links a {
+            color: #CBD5F5;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94A3B8;
+            font-size: 0.9rem;
+            text-align: center;
         }
 
         /* Responsive Design */
@@ -313,6 +376,47 @@
             {% block content %}{% endblock %}
         </div>
     </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-brand">
+                        <i class="fas fa-briefcase"></i>
+                        JobViewWebsite
+                    </div>
+                    <p class="footer-text">Find the right role faster with curated listings and a simple application flow.</p>
+                </div>
+                <div>
+                    <div class="footer-title">Explore</div>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/jobs/">Browse Jobs</a></li>
+                        <li><a href="/application/apply/">Apply</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">Account</div>
+                    <ul class="footer-links">
+                        <li><a href="/users/login/">Login</a></li>
+                        <li><a href="/users/register/">Register</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-title">Contact</div>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@jobview.com">info@jobview.com</a></li>
+                        <li><a href="tel:+12345678900">+1 234 567 8900</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">&copy; 2026 JobViewWebsite. All rights reserved.</div>
+        </div>
+    </footer>
+
+
+
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_js %}{% endblock %}
