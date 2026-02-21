@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up - JobViewWebsite</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sign In Page -->
+    <div class="auth-page" id="signinPage">
+        <div class="auth-content">
+            <!-- Image Section -->
+            <div class="image-section">
+                <img src="{% static 'images/first.jpg' %}" alt="Sign In">
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="form-wrapper">
+                    <h2>Master interviews with AI assistance.</h2>
+                    <p class="form-subtitle">"Prepare. Connect. Where talent meets opportunity - your path to the right job."</p>
+
+                    <form class="auth-form" method="POST" id="signinForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="signin">
+                        
+                        <div class="form-group">
+                            <input type="email" id="signin-email" name="email" placeholder="Email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" id="signin-password" name="password" placeholder="Password" required>
+                        </div>
+
+                        <button type="submit" class="btn-submit">SIGN IN</button>
+                    </form>
+
+                    <div class="divider">or sign in with</div>
+
+                    <div class="social-buttons">
+                        <button class="btn-google">
+                            <i class="fab fa-google"></i> GOOGLE
+                        </button>
+                        <button class="btn-facebook">
+                            <i class="fab fa-facebook-f"></i> FACEBOOK
+                        </button>
+                    </div>
+
+                    <div class="form-footer">
+                        Don't have an account? <a href="#" id="switchToSignup">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div class="auth-page" id="signupPage" style="display: none;">
+        <div class="auth-content">
+            <!-- Image Section -->
+            <div class="image-section">
+                <img src="{% static 'images/second.jpg' %}" alt="Sign Up">
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="form-wrapper">
+                    <h2>Practice, improve, and land your dream job.</h2>
+                    <p class="form-subtitle">"Prepare. Connect. Where talent meets opportunity - your path to the right job."</p>
+
+                    <form class="auth-form" method="POST" id="signupForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="signup">
+                        
+                        <div class="form-group">
+                            <input type="text" id="signup-name" name="name" placeholder="Your Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" id="signup-email" name="email" placeholder="Email Address" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="password" id="signup-password" name="password" placeholder="Password" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="signup-confirm-password" name="confirm_password" placeholder="Confirmation" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">CREATE AN ACCOUNT</button>
+                    </form>
+
+                    <div class="form-footer">
+                        Already have an account? <a href="#" id="switchToSignin">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="auth-footer">
+        <div class="footer-content">
+            <p>© 2026 YourWebsiteName. All rights reserved.</p>
+            <div class="footer-spacer"></div>
+            <p>Powered by AI. Built for your growth.</p>
+        </div>
+    </footer>
+
+    <script>
+        const signinPage = document.getElementById('signinPage');
+        const signupPage = document.getElementById('signupPage');
+        const switchToSignup = document.getElementById('switchToSignup');
+        const switchToSignin = document.getElementById('switchToSignin');
+
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            signinPage.style.display = 'none';
+            signupPage.style.display = 'block';
+        });
+
+        switchToSignin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupPage.style.display = 'none';
+            signinPage.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
