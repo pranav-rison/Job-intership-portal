@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - JobView{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h3>JobView</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{% url 'users:user_dashboard' %}" class="nav-item active">
+                <i class="icon">📊</i> Dashboard
+            </a>
+            <a href="{% url 'application:applied_companies' %}" class="nav-item">
+                <i class="icon">🏢</i> Applied Companies
+            </a>
+            <a href="{% url 'interviews:start_interview' %}" class="nav-item">
+                <i class="icon">🎤</i> Start Interview AI
+            </a>
+            <a href="{% url 'interviews:interview_history' %}" class="nav-item">
+                <i class="icon">📜</i> History of AI
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="{% url 'users:logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Dashboard</h1>
+        </div>
+
+        <!-- Student Detail Section -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Student Detail</h2>
+                <a href="#" class="edit-btn">Edit</a>
+            </div>
+            <div class="student-detail">
+                <div class="profile-avatar">
+                    <img src="{% static 'images/default-avatar.png' %}" alt="Profile">
+                </div>
+                <div class="student-info">
+                    <div class="info-item">
+                        <label>Name</label>
+                        <p>{{ user.first_name|default:user.username }}</p>
+                    </div>
+                    <div class="info-item">
+                        <label>Email</label>
+                        <p>{{ user.email }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Graphs Section -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Graphs</h2>
+            </div>
+            <p class="section-description">These graphs show your improvement based on AI interview answers, highlighting your strongest fields.</p>
+            
+            <div class="graphs-container">
+                <!-- Subject Scores -->
+                <div class="graph-card">
+                    <h3>Subject Scores</h3>
+                    <canvas id="subjectScoresChart"></canvas>
+                </div>
+
+                <!-- Skill Radar -->
+                <div class="graph-card">
+                    <h3>Skill Radar</h3>
+                    <canvas id="skillRadarChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    // Subject Scores Bar Chart
+    const subjectCtx = document.getElementById('subjectScoresChart').getContext('2d');
+    const subjectChart = new Chart(subjectCtx, {
+        type: 'bar',
+        data: {
+            labels: ['DSA', 'Frontend', 'Backend', 'ML/AI'],
+            datasets: [{
+                label: 'Score',
+                data: [75, 65, 85, 70],
+                backgroundColor: '#1E3A8A',
+                borderRadius: 4,
+                borderSkipped: false
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { stepSize: 25 }
+                }
+            }
+        }
+    });
+
+    // Skill Radar Chart
+    const radarCtx = document.getElementById('skillRadarChart').getContext('2d');
+    const radarChart = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+            labels: ['Communication', 'Technical', 'Problem Solving', 'Leadership', 'Teamwork', 'Creativity'],
+            datasets: [{
+                label: 'Your Skills',
+                data: [75, 80, 85, 70, 75, 70],
+                borderColor: '#3B82F6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                pointBackgroundColor: '#1E3A8A'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { stepSize: 20 }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

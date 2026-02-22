@@ -21,6 +21,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     
     path("", include("core.urls")),          # homepage + jobs
-    path("users/", include("users.urls")),   # register + login
+    path("users/", include("users.urls")),   # register + login + dashboard
+    path("users/", include("users.urls_dashboard")),  # dashboard pages
     path("application/", include("application.urls")),  # job applications
+    path("application/", include("application.urls_applied")),  # applied companies
+    path("interviews/", include("interviews.urls")),  # interview + history
 ]

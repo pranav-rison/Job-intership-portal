@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Start Interview AI - JobView{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/interview.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h3>JobView</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{% url 'users:user_dashboard' %}" class="nav-item">
+                <i class="icon">📊</i> Dashboard
+            </a>
+            <a href="{% url 'application:applied_companies' %}" class="nav-item">
+                <i class="icon">🏢</i> Applied Companies
+            </a>
+            <a href="{% url 'interviews:start_interview' %}" class="nav-item active">
+                <i class="icon">🎤</i> Start Interview AI
+            </a>
+            <a href="{% url 'interviews:interview_history' %}" class="nav-item">
+                <i class="icon">📜</i> History of AI
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="{% url 'users:logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Start Interview AI</h1>
+        </div>
+        <div class="placeholder-content">
+            <h2>Welcome to Start Interview AI</h2>
+            <p>This page will allow you to start AI-powered interview sessions.</p>
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -33,7 +33,11 @@
                             <a class="nav-link" href="/application/apply/"><i class="fas fa-file-alt"></i> Apply</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-auth btn btn-light btn-sm" href="/users/auth/"><i class="fas fa-user"></i> Sign In / Sign Up</a>
+                            {% if user.is_authenticated %}
+                                <a class="nav-link btn-auth btn btn-light btn-sm" href="{% url 'users:logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            {% else %}
+                                <a class="nav-link btn-auth btn btn-light btn-sm" href="{% url 'users:auth' %}"><i class="fas fa-user"></i> Sign In / Sign Up</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
@@ -68,7 +72,13 @@
                 <div>
                     <div class="footer-title">Account</div>
                     <ul class="footer-links">
-                        <li><a href="/users/auth/">Sign In / Sign Up</a></li>
+                        <li>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'users:user_dashboard' %}">Dashboard</a>
+                            {% else %}
+                                <a href="{% url 'users:auth' %}">Sign In / Sign Up</a>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
                 <div>
@@ -79,7 +89,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">&copy; 2026 JobViewWebsite. All rights reserved.</div>
+            <div class="footer-bottom">&copy; 2026 CareerConnect AI. All rights reserved.</div>
         </div>
     </footer>
 
