@@ -2,26 +2,30 @@
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 import json
 
 from interviews.models import InterviewSession, InterviewQuestion
 from interviews.services.ai_generator import generate_question
 from interviews.services.ai_evaluator import evaluate_answer
 
-from django.contrib.auth.models import User
 
 @csrf_exempt
+@login_required(login_url='/users/auth/')
 def chat_interview(request):
     if request.method == "POST":
         data = json.loads(request.body)
         message = data.get("message")
-        # user = request.user
-        user = User.objects.first()
+        user = request.user  # Always use the logged-in user
 
-        session, created = InterviewSession.objects.get_or_create(
+        # Get the most recent incomplete session for this user, or create one
+        session = InterviewSession.objects.filter(
             user=user,
             is_completed=False
-        )
+        ).first()
+
+        if not session:
+            session = InterviewSession.objects.create(user=user)
 
         # START
         if session.stage == "waiting_for_start":
@@ -54,7 +58,9 @@ def chat_interview(request):
 
                 InterviewQuestion.objects.create(
                     session=session,
-                    question_text=question
+                    question_text=question,
+                    question_number=session.current_question_number,
+                    max_score=10,
                 )
 
                 session.stage = "waiting_for_answer"
@@ -87,9 +93,19 @@ def chat_interview(request):
 
                 # If 5 questions done
                 if session.current_question_number == 5:
-                    final_score = round(session.total_score / 5, 2)
+                    # Score out of 10 per question, 5 questions → max 50 pts
+                    max_possible = session.total_questions * 10
+                    percentage = round((session.total_score / max_possible) * 100, 1) if max_possible > 0 else 0
+                    final_score = round(session.total_score / session.total_questions, 2)
+
+                    from django.utils import timezone
                     session.stage = "completed"
                     session.is_completed = True
+                    session.percentage_score = percentage
+                    session.completed_at = timezone.now()
+                    # Calculate duration in minutes from session start
+                    duration_delta = timezone.now() - session.created_at
+                    session.duration_minutes = max(1, int(duration_delta.total_seconds() / 60))
                     session.save()
 
                     return JsonResponse({
@@ -98,7 +114,7 @@ Score: {result['score']}/10
 Feedback: {result['feedback']}
 
 Interview Completed ✅
-Final Score: {final_score}/10
+Final Score: {final_score}/10  ({percentage}%)
 """
                     })
 
@@ -115,7 +131,9 @@ Final Score: {final_score}/10
 
                 InterviewQuestion.objects.create(
                     session=session,
-                    question_text=next_question
+                    question_text=next_question,
+                    question_number=next_q_number,
+                    max_score=10,
                 )
 
                 return JsonResponse({
