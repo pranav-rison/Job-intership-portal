@@ -441,7 +441,20 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <h3>CareerConnect AI</h3>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #2563eb 0%, #1de7f2 100%); border-radius: 8px;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="7" width="18" height="11" rx="3" fill="#fff"/>
+                                <rect x="7" y="3" width="10" height="4" rx="2" fill="#fff"/>
+                                <rect x="3" y="7" width="18" height="11" rx="3" stroke="#2563eb" stroke-width="1.5"/>
+                                <rect x="7" y="3" width="10" height="4" rx="2" stroke="#2563eb" stroke-width="1.5"/>
+                            </svg>
+                        </span>
+                        <span style="font-family: 'Inter', 'Segoe UI', 'Georgia', 'Times New Roman', serif; font-size: 19px; font-weight: 800; letter-spacing: 0.01em; color: #fff;">
+                            <span style="color: #fff; font-weight: 800;">CareerConnect</span>
+                            <span style="color: #2563eb; font-weight: 800;">AI</span>
+                        </span>
+                    </div>
             </div>
             <nav class="sidebar-nav">
                 <a href="{% url 'users:user_dashboard' %}" class="nav-item">

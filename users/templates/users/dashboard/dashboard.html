@@ -271,25 +271,38 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-brand">
-                <h3>CareerConnect AI</h3>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #2563eb 0%, #1de7f2 100%); border-radius: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="7" width="18" height="11" rx="3" fill="#fff"/>
+                            <rect x="7" y="3" width="10" height="4" rx="2" fill="#fff"/>
+                            <rect x="3" y="7" width="18" height="11" rx="3" stroke="#2563eb" stroke-width="1.5"/>
+                            <rect x="7" y="3" width="10" height="4" rx="2" stroke="#2563eb" stroke-width="1.5"/>
+                        </svg>
+                    </span>
+                    <span style="font-family: 'Inter', 'Segoe UI', 'Georgia', 'Times New Roman', serif; font-size: 19px; font-weight: 800; letter-spacing: 0.01em; color: #fff;">
+                        <span style="color: #fff; font-weight: 800;">CareerConnect</span>
+                        <span style="color: #2563eb; font-weight: 800;">AI</span>
+                    </span>
+                </div>
             </div>
             <nav class="sidebar-nav">
-                <a href="{% url 'users:user_dashboard' %}" class="nav-item active">
-                    <span class="icon">📊</span> Dashboard
-                </a>
-                <a href="{% url 'application:applied_companies' %}" class="nav-item">
-                    <span class="icon">🏢</span> Applied Companies
-                </a>
-                <a href="{% url 'application:apply_companies' %}" class="nav-item">
-                    <span class="icon">📝</span> Apply to Companies
-                </a>
-                <a href="{% url 'interviews:start_interview' %}" class="nav-item">
-                    <span class="icon">🎤</span> Interview AI
-                </a>
-                <a href="{% url 'interviews:interview_history' %}" class="nav-item">
-                    <span class="icon">📜</span> History of AI
-                </a>
-            </nav>
+                            <a href="{% url 'users:user_dashboard' %}" class="nav-item active" style="font-family: 'Georgia', 'Times New Roman', serif; font-size: 15px;font-weight: 600;">
+                                <span class="icon">📊</span> Dashboard
+                                </a>
+                                <a href="{% url 'application:applied_companies' %}" class="nav-item" style="font-family: 'Georgia', 'Times New Roman', serif; font-size: 15px; font-weight: 600;">
+                                    <span class="icon">🏢</span> Applied Companies
+                                </a>
+                                <a href="{% url 'application:apply_companies' %}" class="nav-item" style="font-family: 'Georgia', 'Times New Roman', serif; font-size: 15px; font-weight: 600;">
+                                    <span class="icon">📝</span> Apply to Companies
+                                </a>
+                                <a href="{% url 'interviews:start_interview' %}" class="nav-item" style="font-family: 'Georgia', 'Times New Roman', serif; font-size: 15px; font-weight: 600;">
+                                    <span class="icon">🎤</span> Interview AI
+                                </a>
+                                <a href="{% url 'interviews:interview_history' %}" class="nav-item" style="font-family: 'Georgia', 'Times New Roman', serif; font-size: 15px; font-weight: 600;">
+                                    <span class="icon">📜</span> History of AI
+                                </a>
+                        </nav>
             <div class="sidebar-footer">
                 <form method="post" action="{% url 'users:logout' %}">
                     {% csrf_token %}
@@ -304,28 +317,61 @@
         <main class="main-content">
             <!-- Hero Section -->
             <div class="hero-section">
-                <h1 class="hero-title">User Dashboard</h1>
-                <p class="hero-subtitle">Welcome back, <span class="username">{{ user.first_name|default:user.username }}</span>. Here's your career progress.</p>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h1 style="font-family: 'Inter', 'Roboto', Arial, sans-serif; font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 0.3em; letter-spacing: -0.5px;">User Dashboard</h1>
+                        <p style="font-family: 'Inter', 'Roboto', Arial, sans-serif; font-size: 1.08rem; color: #5e6a7a; font-weight: 500; margin: 0; letter-spacing: 0.01em;">
+                            Welcome back, <span style="color: #2563eb; font-weight: 700; font-family: inherit;">{{ user.first_name|default:user.username }}</span>. Here's your career progress.
+                        </p>
+                    </div>
+                    <button id="subscribe-btn" style="margin-left: 24px; padding: 10px 28px; font-size: 1rem; font-family: 'Inter', 'Roboto', Arial, sans-serif; font-weight: 700; border-radius: 8px; background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%); color: #fff; border: none; box-shadow: 0 2px 8px rgba(44,62,80,0.10); cursor: pointer; transition: background 0.2s, color 0.2s;">
+                        Subscribe
+                    </button>
+                </div>
+                <script>
+                    // Subscribe button toggle UI
+                    const subscribeBtn = document.getElementById('subscribe-btn');
+                    if (subscribeBtn) {
+                        subscribeBtn.addEventListener('click', function() {
+                            if (subscribeBtn.textContent.trim() === 'Subscribe') {
+                                subscribeBtn.textContent = 'Subscribed';
+                                subscribeBtn.style.background = 'linear-gradient(90deg, #22c55e 0%, #2563eb 100%)';
+                            } else {
+                                subscribeBtn.textContent = 'Subscribe';
+                                subscribeBtn.style.background = 'linear-gradient(90deg, #2563eb 0%, #7c3aed 100%)';
+                            }
+                        });
+                    }
+                </script>
             </div>
 
             <!-- Student Detail Section -->
             <section class="dashboard-section">
-                <div class="section-header">
-                    <h2>Student Detail</h2>
-                    <a href="#" class="edit-btn">✏️ Edit</a>
-                </div>
-                <div class="student-detail">
-                    <div class="profile-avatar">
-                        <img src="{% static 'images/default-avatar.png' %}" alt="Profile">
+                <div class="account-card" style="display: flex; align-items: center; background: #181a20; border-radius: 20px; padding: 32px 36px; box-shadow: 0 4px 24px rgba(0,0,0,0.25); position: relative; gap: 32px;">
+                    <a href="#" class="edit-btn" style="position: absolute; top: 0; right: 0; background: #23262f; color: #fff; border-radius: 8px; padding: 2px; font-weight: 600; font-size: 15px; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.10); transition: background 0.2s; text-decoration: none;">Edit Profile</a>
+                    <div class="profile-avatar" style="position: relative;">
+                        <img src="{% static 'images/first.jpg' %}" alt="Profile" style="width: 100px; height: 100px; border-radius: 16px; background: #f3d6c6; border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.10);">
+                        <span style="position: absolute; bottom: 10px; right: 10px; width: 16px; height: 16px; background: #1de782; border-radius: 50%; border: 2px solid #181a20;"></span>
                     </div>
-                    <div class="student-info">
-                        <div class="info-item">
-                            <label>Name</label>
-                            <p>{{ user.first_name|default:user.username }}</p>
-                        </div>
-                        <div class="info-item">
-                            <label>Email</label>
-                            <p>{{ user.email }}</p>
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                        <span style="color: #6c7a89; font-size: 13px; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 2px;">ACCOUNT OVERVIEW</span>
+                        <div style="display: flex; gap: 40px; align-items: flex-end; flex-wrap: wrap;">
+                            <div style="min-width: 180px;">
+                                <div style="color: #a0a0a0; font-size: 13px; font-weight: 500;">FULL NAME</div>
+                                <div style="color: #fff; font-size: 22px; font-weight: 700; line-height: 1.2;">{{ user.first_name|default:user.username }}</div>
+                            </div>
+                            <div style="min-width: 220px;">
+                                <div style="color: #a0a0a0; font-size: 13px; font-weight: 500;">EMAIL ADDRESS</div>
+                                <div style="color: #fff; font-size: 20px; font-weight: 700; line-height: 1.2; word-break: break-all;">{{ user.email }}</div>
+                            </div>
+                            <div style="margin-left: auto; text-align: right; min-width: 120px;">
+                                <div style="color: #a0a0a0; font-size: 13px; font-weight: 500;">OVERALL RANKING</div>
+                                <div style="color: #1de7f2; font-size: 22px; font-weight: 700;">Top 2%</div>
+                            </div>
+                            <div style="margin-left: 24px; text-align: right; min-width: 120px;">
+                                <div style="color: #a0a0a0; font-size: 13px; font-weight: 500;">YOUR RANK</div>
+                                <div style="color: #22c55e; font-size: 22px; font-weight: 700;">#12</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -333,27 +379,91 @@
 
             <!-- Graphs Section -->
             <section class="dashboard-section">
-                <div class="section-header">
-                    <h2>Graphs</h2>
-                </div>
-                <p class="section-description">These graphs show your improvement based on AI interview answers, highlighting your strongest fields.</p>
-                
-                <div class="graphs-container">
-                    <!-- Subject Scores -->
-                    <div class="graph-card">
-                        <h3>Subject Scores</h3>
-                        <canvas id="subjectScoresChart"></canvas>
+                <div class="graphs-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 32px;">
+                    <!-- Technical Scores Card -->
+                    <div class="graph-card" style="background: #23262f; border-radius: 22px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); padding: 32px 28px; border: none;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <div>
+                                <div style="font-family: 'Inter', 'Roboto', Arial, sans-serif; font-size: 1.35rem; font-weight: 800; color: #fff;">Technical Scores</div>
+                                <div style="font-size: 1rem; color: #7c8ba0; font-weight: 500; margin-top: 2px;">Performance across core domains</div>
+                            </div>
+                            <div style="background: #2e3a5c; border-radius: 12px; padding: 8px 10px;">
+                                <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="4" height="16" rx="2" fill="#7ee6ff"/><rect x="10" y="8" width="4" height="12" rx="2" fill="#a5b4fc"/><rect x="16" y="12" width="4" height="8" rx="2" fill="#7ee6ff"/></svg>
+                            </div>
+                        </div>
+                        <div style="margin-top: 18px;">
+                            <canvas id="subjectScoresChart"></canvas>
+                        </div>
                     </div>
 
-                    <!-- Skill Radar -->
-                    <div class="graph-card">
-                        <h3>Skill Radar</h3>
-                        <canvas id="skillRadarChart"></canvas>
+                    <!-- Skill Radar Card -->
+                    <div class="graph-card" style="background: #23262f; border-radius: 22px; box-shadow: 0 4px 24px rgba(0,0,0,0.18); padding: 32px 28px; border: none;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <div>
+                                <div style="font-family: 'Inter', 'Roboto', Arial, sans-serif; font-size: 1.35rem; font-weight: 800; color: #fff;">Skill Radar</div>
+                                <div style="font-size: 1rem; color: #7c8ba0; font-weight: 500; margin-top: 2px;">Soft skills and adaptability metrics</div>
+                            </div>
+                            <div style="background: #2e3a5c; border-radius: 12px; padding: 8px 10px;">
+                                <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20M2 12h20" stroke="#7ee6ff" stroke-width="2"/><circle cx="12" cy="12" r="8" stroke="#a5b4fc" stroke-width="2"/></svg>
+                            </div>
+                        </div>
+                        <div style="margin-top: 18px;">
+                            <canvas id="skillRadarChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
         </main>
     </div>
+
+    <!-- Floating AI Button -->
+    <div id="floating-ai-container" style="position: fixed; bottom: 36px; right: 36px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end;">
+        <!-- Speech Bubble -->
+        <div id="ai-bubble" style="background: rgba(36,41,68,0.98); color: #fff; padding: 12px 22px; border-radius: 16px; font-size: 17px; font-weight: 600; margin-bottom: 10px; box-shadow: 0 2px 12px rgba(0,0,0,0.18); position: relative; display: none; border: 1.5px solid #2563eb;">
+            Ready to Practice?
+            <span id="close-bubble" style="position: absolute; top: 7px; right: 10px; cursor: pointer; font-size: 16px; color: #aaa;">&times;</span>
+        </div>
+        <button id="rison-ai-btn" style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); border: 2.5px solid #23262f; box-shadow: 0 4px 18px rgba(37,99,235,0.18); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: box-shadow 0.2s, background 0.2s; position: relative;">
+            <span style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; color: #e0e7ff; font-size: 22px; font-weight: 800; letter-spacing: 1.2px; text-shadow: 0 2px 8px rgba(44,62,80,0.18);">
+                <span style="line-height: 1.1; font-size: 22px;">RISON</span>
+                <span style="line-height: 1.1; color: #a5b4fc; font-size: 14px; font-weight: 700; letter-spacing: 2px;">AI</span>
+            </span>
+        </button>
+    </div>
+
+    <script>
+        // Floating AI Button Logic
+        const aiBtn = document.getElementById('rison-ai-btn');
+        const aiBubble = document.getElementById('ai-bubble');
+        const closeBubble = document.getElementById('close-bubble');
+
+        // Show bubble on page load for a few seconds
+        window.addEventListener('DOMContentLoaded', () => {
+            aiBubble.style.display = 'block';
+            setTimeout(() => {
+                aiBubble.style.display = 'none';
+            }, 4000);
+        });
+
+        // Close bubble on X click
+        closeBubble.addEventListener('click', () => {
+            aiBubble.style.display = 'none';
+        });
+
+        // Show bubble on hover
+        aiBtn.addEventListener('mouseenter', () => {
+            aiBubble.style.display = 'block';
+        });
+        aiBtn.addEventListener('mouseleave', () => {
+            aiBubble.style.display = 'none';
+        });
+
+        // Redirect to interview.html on click
+        aiBtn.addEventListener('click', () => {
+            window.location.href = '{% url "interviews:start_interview" %}';
+        });
+    </script>
+
 
     <script>
         // Subject Scores Bar Chart
