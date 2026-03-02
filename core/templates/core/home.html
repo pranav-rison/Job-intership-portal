@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Home - Find Your Dream Job{% endblock %}
+{% block title %}Home - Master Your Interviews{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -158,14 +158,14 @@
         align-items: center;
         justify-content: center;
         background: #fafafa;
+        overflow: hidden;
     }
     
-    .hero-image-circle {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        border: 1px solid #e5e5e5;
-        background: #fff;
+    .hero-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
     }
     
     /* Stats Section */
@@ -508,6 +508,97 @@
         margin: 80px 0 50px 0;
     }
     
+    /* Scrolling Companies Section */
+    .companies-scroll-section {
+        background: #f8f8f8;
+        padding: 60px 0;
+        /* margin: 10px 0 0 0; */
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .companies-scroll-section::before,
+    .companies-scroll-section::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 150px;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+    }
+    
+    .companies-scroll-section::before {
+        left: 0;
+        background: linear-gradient(to right, #f8f8f8, transparent);
+    }
+    
+    .companies-scroll-section::after {
+        right: 0;
+        background: linear-gradient(to left, #f8f8f8, transparent);
+    }
+    
+    .companies-scroll-title {
+        text-align: center;
+        font-size: 0.85rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #999;
+        font-weight: 600;
+        margin-bottom: 40px;
+    }
+    
+    .companies-scroll-track {
+        display: flex;
+        animation: scroll 30s linear infinite;
+        width: fit-content;
+    }
+    
+    .companies-scroll-group {
+        display: flex;
+        gap: 80px;
+        align-items: center;
+        padding: 0 40px;
+    }
+    
+    .company-logo-item {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333;
+        white-space: nowrap;
+        user-select: none;
+        transition: all 0.3s ease;
+    }
+    
+    .company-logo-item:hover {
+        color: #000;
+        transform: scale(1.1);
+    }
+    
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .companies-scroll-section {
+            padding: 40px 0;
+        }
+        
+        .company-logo-item {
+            font-size: 1.5rem;
+        }
+        
+        .companies-scroll-group {
+            gap: 60px;
+        }
+    }
+    
     /* Category Grid */
     .category-grid {
         display: grid;
@@ -614,6 +705,82 @@
     .feature-card p {
         color: #666;
         font-size: 1rem;
+        line-height: 1.7;
+        margin: 0;
+    }
+    
+    /* Technical Architecture Section */
+    .tech-architecture-section {
+        background: #fafafa;
+        padding: 80px 20px;
+        margin: 60px 0;
+    }
+    
+    .tech-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .tech-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    
+    .tech-label {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 11px;
+        color: #999;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+    
+    .tech-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #000;
+        margin: 0;
+    }
+    
+    .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+    
+    .tech-card {
+        background: #fff;
+        padding: 35px 30px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+    }
+    
+    .tech-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        border-color: #2563eb;
+    }
+    
+    .tech-icon {
+        font-size: 32px;
+        color: #2563eb;
+        margin-bottom: 20px;
+    }
+    
+    .tech-card h4 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #000;
+        margin: 0 0 12px 0;
+    }
+    
+    .tech-card p {
+        color: #666;
+        font-size: 0.95rem;
         line-height: 1.7;
         margin: 0;
     }
@@ -808,12 +975,12 @@
     <div class="hero-container">
         <div class="hero-content">
             <div class="hero-label">Established MMXXIV</div>
-            <h1 class="hero-title">The Art of <span class="italic">Progression.</span></h1>
-            <p class="hero-description">Redefining the architecture of modern recruitment through high-precision AI and curated career strategy for the discerning professional.</p>
-            <a href="/users/auth/" class="hero-cta-button">Join Our Team</a>
+            <h1 class="hero-title">The Art of <span class="italic">Interview Mastery.</span></h1>
+            <p class="hero-description">Transform your interview performance through AI-powered practice sessions. Master every question, refine your communication, and land your dream role with confidence.</p>
+            <a href="#" onclick="event.preventDefault(); openSignup();" class="hero-cta-button">Start Practicing</a>
         </div>
         <div class="hero-image">
-            <div class="hero-image-circle"></div>
+            <img src="{% static 'images/home.webp' %}" alt="Interview Mastery">
         </div>
     </div>
 </section>
@@ -822,20 +989,20 @@
 <section class="stats-section">
     <div class="stats-grid">
         <div class="stat-item">
-            <div class="stat-number">12k</div>
-            <div class="stat-label">Placement Capital</div>
+            <div class="stat-number">50k+</div>
+            <div class="stat-label">Interviews Completed</div>
         </div>
         <div class="stat-item">
-            <div class="stat-number">400+</div>
-            <div class="stat-label">Global Partners</div>
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Companies Covered</div>
         </div>
         <div class="stat-item">
-            <div class="stat-number">94%</div>
-            <div class="stat-label">Success Quotient</div>
+            <div class="stat-number">92%</div>
+            <div class="stat-label">Success Rate</div>
         </div>
         <div class="stat-item">
-            <div class="stat-number">24h</div>
-            <div class="stat-label">Concierge Cycle</div>
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">AI Available</div>
         </div>
     </div>
 </section>
@@ -849,10 +1016,10 @@
                 <h3>Our Story</h3>
             </div>
             <div class="story-content">
-                <p class="story-intro">CareerConnect was founded with a singular, uncompromising vision: to revolutionize the job search experience by harmonizing cutting-edge AI technology with sophisticated, human-centric design. We recognized that the pursuit of a career is not merely a transaction, but a pivotal life event.</p>
+                <p class="story-intro">CareerConnect was founded with a singular, uncompromising vision: to revolutionize interview preparation through cutting-edge AI technology and sophisticated, human-centric design. We recognized that interview success is not about memorization, but about confident, authentic communication.</p>
                 <div class="story-details">
-                    <p>We believe that finding the right career opportunity should be intelligent, efficient, and deeply personalized. In a world of noise, we provide clarity.</p>
-                    <p>Our platform stands as a bridge between talent and realized opportunity, ensuring that every professional interaction is meaningful and every match is precise.</p>
+                    <p>We believe that interview preparation should be intelligent, personalized, and accessible to everyone. In a world of generic advice, we provide precision training.</p>
+                    <p>Our platform bridges the gap between preparation and performance, ensuring that every practice session brings you closer to interview excellence and career success.</p>
                 </div>
             </div>
         </div>
@@ -866,7 +1033,7 @@
             </div>
             <div class="rison-content">
                 <h3>Powered by Rison AI</h3>
-                <p>At the core of our platform lies Rison AI, our proprietary engine designed to deconstruct the complexities of the modern job market. Rison doesn't just match keywords; it understands context, potential, and trajectory.</p>
+                <p>At the core of our platform lies Rison AI, our proprietary engine designed to simulate real interview scenarios with precision. Rison doesn't just ask questions; it evaluates your communication, analyzes your responses, and provides actionable feedback.</p>
                 <div class="rison-features">
                     <div class="rison-feature">
                         <div class="feature-icon">
@@ -875,8 +1042,8 @@
                             </svg>
                         </div>
                         <div>
-                            <h4>Predictive Analytics</h4>
-                            <p>Forecasting career paths based on market trends and skill adjacency.</p>
+                            <h4>Real-Time Analysis</h4>
+                            <p>Instant feedback on your responses, communication style, and technical accuracy.</p>
                         </div>
                     </div>
                     <div class="rison-feature">
@@ -911,7 +1078,7 @@
                     </div>
                     <div class="value-content">
                         <h4>Innovation</h4>
-                        <p>Pioneering AI-powered career solutions that push the boundaries of what is technically possible, transforming the abstract into the actionable.</p>
+                        <p>Pioneering AI-powered interview training that pushes the boundaries of what is technically possible, transforming nervous candidates into confident communicators.</p>
                     </div>
                 </div>
                 <div class="value-item">
@@ -923,7 +1090,7 @@
                     </div>
                     <div class="value-content">
                         <h4>Trust</h4>
-                        <p>Building lasting relationships with integrity. We treat user data with the reverence of a vault, ensuring transparency in how our algorithms influence outcomes.</p>
+                        <p>Building confidence through ethical AI. We treat your practice data with the reverence of a vault, ensuring transparency in how our algorithms evaluate performance.</p>
                     </div>
                 </div>
                 <div class="value-item">
@@ -934,7 +1101,7 @@
                     </div>
                     <div class="value-content">
                         <h4>Excellence</h4>
-                        <p>Delivering exceptional value at every step. We reject mediocrity, striving for a polished, seamless experience that respects the ambition of our users.</p>
+                        <p>Delivering exceptional training at every step. We reject generic preparation, striving for personalized feedback that respects your unique career journey.</p>
                     </div>
                 </div>
             </div>
@@ -943,30 +1110,62 @@
         <!-- Quote Section -->
         <div class="quote-section">
             <div class="quote-icon">"</div>
-            <p class="quote-text">The future of work is not just about finding a job.<br>It is about architectural career design.</p>
+            <p class="quote-text">The future of hiring is not just about credentials.<br>It is about confident, authentic communication.</p>
             <p class="quote-author">CAREERCONNECT AI</p>
         </div>
     </div>
 </section>
 
+<!-- Scrolling Companies Section -->
+<section class="companies-scroll-section">
+    <div class="companies-scroll-title">Trusted by Top Companies Worldwide</div>
+    <div class="companies-scroll-track">
+        <div class="companies-scroll-group">
+            <div class="company-logo-item">Google</div>
+            <div class="company-logo-item">Amazon</div>
+            <div class="company-logo-item">Microsoft</div>
+            <div class="company-logo-item">Meta</div>
+            <div class="company-logo-item">Apple</div>
+            <div class="company-logo-item">Netflix</div>
+            <div class="company-logo-item">Tesla</div>
+            <div class="company-logo-item">IBM</div>
+            <div class="company-logo-item">Adobe</div>
+            <div class="company-logo-item">Oracle</div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="companies-scroll-group">
+            <div class="company-logo-item">Google</div>
+            <div class="company-logo-item">Amazon</div>
+            <div class="company-logo-item">Microsoft</div>
+            <div class="company-logo-item">Meta</div>
+            <div class="company-logo-item">Apple</div>
+            <div class="company-logo-item">Netflix</div>
+            <div class="company-logo-item">Tesla</div>
+            <div class="company-logo-item">IBM</div>
+            <div class="company-logo-item">Adobe</div>
+            <div class="company-logo-item">Oracle</div>
+        </div>
+    </div>
+</section>
+
 <!-- Categories Section -->
-<h2 class="section-title">Popular Categories</h2>
+<h2 class="section-title">Interview Categories</h2>
 <section class="category-grid">
     <div class="category-card">
-        <strong>Software Engineer</strong>
-        <span>1,200+ roles</span>
+        <strong>Technical Coding</strong>
+        <span>200+ scenarios</span>
     </div>
     <div class="category-card">
-        <strong>AI/ML Engineer</strong>
-        <span>640+ roles</span>
+        <strong>System Design</strong>
+        <span>150+ scenarios</span>
     </div>
     <div class="category-card">
-        <strong>Product Manager</strong>
-        <span>430+ roles</span>
+        <strong>Behavioral</strong>
+        <span>180+ scenarios</span>
     </div>
     <div class="category-card">
-        <strong>UI/UX Designer</strong>
-        <span>320+ roles</span>
+        <strong>Leadership</strong>
+        <span>120+ scenarios</span>
     </div>
 </section>
 
@@ -986,25 +1185,85 @@
         <p>Analyze your performance with visual graphs. Identify your strong and weak subjects so you can focus on improvement and increase your chances of getting hired.</p>
     </div>
     <div class="feature-card">
-        <h4>Performance Based Jobs</h4>
-        <p>Rison AI recommends jobs based on your interview performance and skills. Apply to opportunities that truly match your strengths and improve your chances of getting hired.</p>
+        <h4>Subject-Specific Training</h4>
+        <p>Practice with interview questions organized by subjects like Data Structures & Algorithms, System Design, Behavioral Interviews, and Database & SQL. Master each topic with comprehensive practice scenarios.</p>
     </div>
     <div class="feature-card">
-        <h4>Fast Apply</h4>
-        <p>Save time with a unified application flow across companies. One profile, multiple applications.</p>
+        <h4>Progress Tracking</h4>
+        <p>Monitor your improvement over time with detailed analytics. See which areas you've mastered and where you need more practice.</p>
     </div>
     <div class="feature-card">
-        <h4>Career Guidance</h4>
-        <p>Get personalized career advice and recommendations to help you grow and advance in your professional journey.</p>
+        <h4>Expert Feedback</h4>
+        <p>Get AI-powered insights on your communication style, technical accuracy, and areas for improvement. Learn exactly what to fix before your real interview.</p>
+    </div>
+</section>
+
+<!-- Technical Architecture Section -->
+<section class="tech-architecture-section">
+    <div class="tech-container">
+        <div class="tech-header">
+            <div class="tech-label">TECHNOLOGY STACK</div>
+            <h2 class="tech-title">CV Interview Technology</h2>
+        </div>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <h4>Intelligent Document Processing</h4>
+                <p>Advanced PDF parsing and text extraction using LangChain framework. Extracts structured information from your resume including skills, experience, and qualifications for personalized interview generation.</p>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h4>Vector Embeddings & FAISS</h4>
+                <p>Converts your resume into semantic embeddings stored in FAISS (Facebook AI Similarity Search) vector database. Enables lightning-fast, context-aware question generation and retrieval based on your specific background.</p>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h4>Groq LLM Integration</h4>
+                <p>Powered by Groq's ultra-fast Large Language Model (LLM) for intelligent question generation and answer evaluation. Provides real-time, human-like interview interactions with personalized feedback based on your profile.</p>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h4>Smart Content Chunking</h4>
+                <p>Text splitting algorithms that break down resume content into optimal chunks for processing. Ensures every detail from your experience is indexed and can be referenced during interview question generation.</p>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Real-Time Answer Evaluation</h4>
+                <p>Combines vector similarity search with LLM reasoning to evaluate your responses. Retrieves relevant context from your resume, compares with your answer, and generates detailed performance insights instantly.</p>
+            </div>
+            
+            <div class="tech-card">
+                <div class="tech-icon">
+                    <i class="fas fa-save"></i>
+                </div>
+                <h4>Persistent Progress Tracking</h4>
+                <p>Django ORM with SQLite database stores every interview session, question, answer, and evaluation. Access complete interview history, performance trends, and improvement analytics across all your practice sessions.</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- CTA Section -->
 <section class="home-cta">
     <div>
-        <h3>Ready to start your next role?</h3>
-        <p>Join thousands of professionals advancing their careers with JobView.</p>
+        <h3>Ready to ace your next interview?</h3>
+        <p>Join thousands of professionals mastering interviews with AI-powered practice.</p>
     </div>
-    <a href="/users/auth/">Create Account</a>
+    <a href="#" onclick="event.preventDefault(); openSignup();">Start Practicing Now</a>
 </section>
 {% endblock %}

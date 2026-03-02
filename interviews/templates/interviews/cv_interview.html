@@ -1,0 +1,1372 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>CV Interview - CareerConnect AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .dashboard-wrapper {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #ffffff;
+            color: #2c3e50;
+            padding: 20px 0 0 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid #e1e8ed;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-brand {
+            margin-bottom: 40px;
+        }
+
+        .sidebar-brand h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            font-weight: 700;
+            letter-spacing: 0.025em;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background-color: #f0f4f8;
+            color: #2563eb;
+        }
+
+        .nav-item.active {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .sidebar-footer {
+            padding: 20px 0;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .logout-btn {
+            width: 90%;
+            padding: 12px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 0;
+            background: #ffffff;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            padding: 80px 80px 60px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .section-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 2px;
+            background: #2563eb;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            color: #000;
+        }
+
+        .hero-title .italic {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 3px solid #e5e7eb;
+        }
+
+        /* Upload Section */
+        .upload-container {
+            background: #fafafa;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 60px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .upload-container:hover {
+            border-color: #2563eb;
+            background: #f9fafb;
+        }
+
+        .upload-icon {
+            margin-bottom: 20px;
+        }
+
+        .upload-icon i {
+            font-size: 48px;
+            color: #9ca3af;
+        }
+
+        .upload-text {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        .upload-text .main {
+            font-size: 15px;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .select-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 14px 40px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .select-btn:hover {
+            background: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .upload-formats {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 20px;
+        }
+
+        /* Hero Right - Image */
+        .hero-right {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .resume-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-image::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+        }
+
+        .ai-badge {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .ai-badge-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .ai-indicator {
+            width: 8px;
+            height: 8px;
+            background: #2563eb;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .ai-badge-title {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #2563eb;
+            text-transform: uppercase;
+        }
+
+        .ai-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #1a1a1a;
+            font-style: italic;
+        }
+
+        /* Methodology Section */
+        .methodology-section {
+            padding: 80px 80px;
+            background: #fafafa;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 400;
+            color: #000;
+        }
+
+        .section-subtitle {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #9ca3af;
+            text-transform: uppercase;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .step-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 300;
+            color: #e5e7eb;
+            margin-bottom: 20px;
+        }
+
+        .step-icon {
+            font-size: 28px;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+
+        .step-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 12px;
+        }
+
+        .step-description {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+
+        /* System Capabilities */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .capabilities-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        .capabilities-intro {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .capability-item {
+            margin-bottom: 30px;
+        }
+
+        .capability-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .capability-title::before {
+            content: '◆';
+            color: #2563eb;
+            font-size: 12px;
+        }
+
+        .capability-description {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #6b7280;
+            padding-left: 22px;
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quote-icon {
+            font-size: 48px;
+            color: #e5e7eb;
+            margin-bottom: 25px;
+        }
+
+        .testimonial-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            line-height: 1.6;
+            color: #000;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #6b7280;
+        }
+
+        .author-info .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .author-info .title {
+            font-size: 13px;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        @media (max-width: 1200px) {
+            .hero-section,
+            .steps-grid,
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h3 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.025em; color: #2c3e50;"><i class="fas fa-briefcase"></i> CAREERCONNECT AI</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{% url 'users:user_dashboard' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </a>
+                <a href="{% url 'application:applied_companies' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <i class="fas fa-clipboard-check"></i> Completed Interviews
+                </a>
+                <a href="{% url 'application:apply_companies' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <i class="fas fa-paper-plane"></i> Apply to Companies
+                </a>
+                <a href="{% url 'interviews:start_interview' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <i class="fas fa-robot"></i> Interview AI
+                </a>
+                <a href="{% url 'interviews:interview_history' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <i class="fas fa-history"></i> History of AI
+                </a>
+                <a href="{% url 'interviews:cv_interview' %}" class="nav-item active" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                    <i class="fas fa-file-alt"></i> CV Interview
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <form method="post" action="{% url 'users:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-left">
+                    <div class="section-label">INTERVIEW PREPARATION</div>
+                    <h1 class="hero-title">The Resume <span class="italic">Narrative</span></h1>
+                    <p class="hero-description">
+                        Master your professional story. Upload your CV to begin a sophisticated, AI-driven interview preparation journey tailored exclusively to your experience.
+                    </p>
+                    
+                    <div class="upload-container">
+                        <div class="upload-icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="upload-text">
+                            <div class="main">Drop your CV here or Browse</div>
+                        </div>
+                        <button class="select-btn">SELECT DOCUMENT</button>
+                        <div class="upload-formats">Supported formats: PDF, DOCX, TXT (Max 10MB)</div>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="resume-image">
+                        <div class="ai-badge">
+                            <div class="ai-badge-header">
+                                <div class="ai-indicator"></div>
+                                <span class="ai-badge-title">RISON AI ACTIVE</span>
+                            </div>
+                            <p class="ai-quote">"Your experience in project management aligns with 85% of market demand."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Methodology Section -->
+            <section class="methodology-section">
+                <div class="section-header">
+                    <h2 class="section-title">Methodology</h2>
+                    <span class="section-subtitle">STEP-BY-STEP PROCESS</span>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <h3 class="step-title">Upload</h3>
+                        <p class="step-description">Submit your professional CV for immediate processing.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="step-title">Analyze</h3>
+                        <p class="step-description">AI extracts key skills and career trajectory.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h3 class="step-title">Practice</h3>
+                        <p class="step-description">Engage in simulated, voice-activated scenarios.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="step-title">Feedback</h3>
+                        <p class="step-description">Receive detailed, actionable critique instantly.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <div class="step-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3 class="step-title">Improve</h3>
+                        <p class="step-description">Refine your answers and perfect your delivery.</p>
+                    </div>
+                </div>
+
+                <!-- System Capabilities -->
+                <div class="capabilities-grid">
+                    <div class="capabilities-content">
+                        <h3>System Capabilities</h3>
+                        <p class="capabilities-intro">
+                            Our platform leverages advanced language models to dissect your professional history, ensuring that every interview question you face is relevant, challenging, and constructive.
+                        </p>
+
+                        <div class="capability-item">
+                            <h4 class="capability-title">Intelligent Document Processing</h4>
+                            <p class="capability-description">
+                                Automatically extracts and structures your resume content, converting complex PDF documents into analyzable text while preserving context and meaning.
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h4 class="capability-title">Smart Content Indexing</h4>
+                            <p class="capability-description">
+                                Breaks down your experience into meaningful segments and creates a searchable knowledge base using vector embeddings for instant, context-aware information retrieval.
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h4 class="capability-title">AI-Powered Question Generation</h4>
+                            <p class="capability-description">
+                                Utilizes advanced language models to create personalized interview questions based on your specific skills, experience, and career trajectory.
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h4 class="capability-title">Real-Time Answer Evaluation</h4>
+                            <p class="capability-description">
+                                Analyzes your responses against your resume content and industry standards, providing instant feedback on accuracy, completeness, and communication quality.
+                            </p>
+                        </div>
+
+                        <div class="capability-item">
+                            <h4 class="capability-title">Comprehensive Progress Tracking</h4>
+                            <p class="capability-description">
+                                Maintains detailed records of all your practice sessions, questions asked, answers given, and performance metrics for continuous improvement tracking.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="quote-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <p class="testimonial-text">"The interview preparation was startlingly accurate to the real thing."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <div class="name">SARAH J.</div>
+                                <div class="title">Senior Product Manager</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Interview Modal -->
+    <div id="interviewModal" class="interview-modal">
+        <div class="interview-modal-content">
+            <div class="interview-modal-header">
+                <h2 id="modalTitle">CV Interview</h2>
+                <span class="close-modal" onclick="closeInterviewModal()">&times;</span>
+            </div>
+            <div class="interview-modal-body" id="modalBody">
+                <!-- Content will be dynamically injected -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modal Styles */
+        .interview-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .interview-modal-content {
+            background-color: #fff;
+            margin: 3% auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideDown 0.4s;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideDown {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+
+        .interview-modal-header {
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .interview-modal-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .close-modal {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            transform: scale(1.1);
+        }
+
+        .interview-modal-body {
+            padding: 35px 30px;
+            min-height: 200px;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .question-score {
+            font-size: 0.9rem;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .answer-textarea {
+            width: 100%;
+            min-height: 180px;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+
+        .answer-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .modal-actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-secondary {
+            background: #f3f4f6;
+            color: #1a1a1a;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .modal-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .feedback-box {
+            background: #f0f9ff;
+            border-left: 4px solid #2563eb;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+        .feedback-title {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-text {
+            color: #374151;
+            line-height: 1.7;
+        }
+
+        .results-summary {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .results-score {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin: 20px 0;
+        }
+
+        .results-grade {
+            font-size: 1.5rem;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .results-details {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            color: #991b1b;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            color: #065f46;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .upload-container {
+            cursor: pointer;
+        }
+
+        .upload-container.dragover {
+            background: #f0f9ff;
+            border-color: #2563eb;
+        }
+
+        #resumeFileInput {
+            display: none;
+        }
+    </style>
+
+    <script>
+        // Global variables
+        let currentSessionId = null;
+        let currentQuestionId = null;
+        let currentResumeId = null;
+
+        // Get CSRF token
+        function getCSRFToken() {
+            return document.querySelector('[name=csrfmiddlewaretoken]').value;
+        }
+
+        // Upload container setup
+        const uploadContainer = document.querySelector('.upload-container');
+        const selectBtn = document.querySelector('.select-btn');
+        
+        // Create hidden file input
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.id = 'resumeFileInput';
+        fileInput.accept = '.pdf';
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput);
+
+        // File selection handler
+        selectBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fileInput.click();
+        });
+
+        uploadContainer.addEventListener('click', (e) => {
+            if (e.target !== selectBtn) {
+                fileInput.click();
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+
+        // Drag and drop handlers
+        uploadContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadContainer.classList.add('dragover');
+        });
+
+        uploadContainer.addEventListener('dragleave', () => {
+            uploadContainer.classList.remove('dragover');
+        });
+
+        uploadContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadContainer.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length > 0) {
+                const file = e.dataTransfer.files[0];
+                if (file.name.endsWith('.pdf')) {
+                    handleFileUpload(file);
+                } else {
+                    showError('Please upload a PDF file only.');
+                }
+            }
+        });
+
+        // Handle file upload
+        async function handleFileUpload(file) {
+            if (!file.name.endsWith('.pdf')) {
+                showError('Only PDF files are allowed.');
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+                showError('File size must be less than 10MB.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('resume', file);
+            formData.append('csrfmiddlewaretoken', getCSRFToken());
+
+            showModal('Uploading Resume', '<div class="loading-spinner"><div class="spinner"></div><p>Processing your resume...</p></div>');
+
+            try {
+                const response = await fetch('/interviews/cv-interview/upload-resume/', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': getCSRFToken()
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    currentResumeId = data.resume_id;
+                    showSuccess(`Resume uploaded successfully! Processed ${data.total_chunks} sections.`);
+                    setTimeout(() => {
+                        closeInterviewModal();
+                        promptStartInterview();
+                    }, 2000);
+                } else {
+                    showError(data.error || 'Upload failed. Please try again.');
+                }
+            } catch (error) {
+                showError('Network error. Please check your connection and try again.');
+                console.error('Upload error:', error);
+            }
+        }
+
+        // Prompt to start interview
+        function promptStartInterview() {
+            const content = `
+                <div style="text-align: center; padding: 20px;">
+                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #10b981; margin-bottom: 20px;"></i>
+                    <h3 style="margin-bottom: 15px;">Resume Processed Successfully!</h3>
+                    <p style="color: #6b7280; margin-bottom: 30px;">Ready to start your AI-powered CV interview?</p>
+                    <div class="modal-actions" style="justify-content: center;">
+                        <button class="modal-btn modal-btn-secondary" onclick="closeInterviewModal()">Later</button>
+                        <button class="modal-btn modal-btn-primary" onclick="startInterview()">Start Interview</button>
+                    </div>
+                </div>
+            `;
+            showModal('Ready to Start', content);
+        }
+
+        // Start interview
+        async function startInterview() {
+            if (!currentResumeId) {
+                showError('Please upload a resume first.');
+                return;
+            }
+
+            showModal('Starting Interview', '<div class="loading-spinner"><div class="spinner"></div><p>Generating personalized questions...</p></div>');
+
+            try {
+                const response = await fetch('/interviews/cv-interview/start-interview/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken()
+                    },
+                    body: JSON.stringify({
+                        resume_id: currentResumeId,
+                        num_questions: 5
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    currentSessionId = data.session_id;
+                    showSuccess('Interview started successfully!');
+                    setTimeout(() => {
+                        loadNextQuestion();
+                    }, 1500);
+                } else {
+                    showError(data.error || 'Failed to start interview.');
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+                console.error('Start interview error:', error);
+            }
+        }
+
+        // Load next question
+        async function loadNextQuestion() {
+            if (!currentSessionId) {
+                showError('No active interview session.');
+                return;
+            }
+
+            showModal('Loading Question', '<div class="loading-spinner"><div class="spinner"></div><p>Loading next question...</p></div>');
+
+            try {
+                const response = await fetch(`/interviews/cv-interview/session/${currentSessionId}/next-question/`);
+                const data = await response.json();
+
+                if (response.ok) {
+                    if (data.completed) {
+                        showInterviewResults();
+                    } else if (data.success) {
+                        currentQuestionId = data.question_id;
+                        displayQuestion(data);
+                    }
+                } else {
+                    showError(data.error || 'Failed to load question.');
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+                console.error('Load question error:', error);
+            }
+        }
+
+        // Display question
+        function displayQuestion(data) {
+            const content = `
+                <div class="question-container">
+                    <div class="question-header">
+                        <span class="question-number">Question ${data.question_number} of ${data.total_questions}</span>
+                        <span class="question-score">Score: ${data.current_score}/${data.max_score}</span>
+                    </div>
+                    <div class="question-text">${data.question_text}</div>
+                    <textarea 
+                        id="answerInput" 
+                        class="answer-textarea" 
+                        placeholder="Type your answer here..."
+                        rows="8"
+                    ></textarea>
+                    <div class="modal-actions">
+                        <button class="modal-btn modal-btn-primary" onclick="submitAnswer()">
+                            <i class="fas fa-paper-plane"></i> Submit Answer
+                        </button>
+                    </div>
+                </div>
+            `;
+            showModal(`Question ${data.question_number}`, content);
+        }
+
+        // Submit answer
+        async function submitAnswer() {
+            const answerInput = document.getElementById('answerInput');
+            const answer = answerInput.value.trim();
+
+            if (!answer) {
+                showError('Please provide an answer before submitting.');
+                return;
+            }
+
+            const submitBtn = event.target;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Evaluating...';
+
+            try {
+                const response = await fetch('/interviews/cv-interview/submit-answer/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCSRFToken()
+                    },
+                    body: JSON.stringify({
+                        question_id: currentQuestionId,
+                        answer: answer
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    displayFeedback(data);
+                } else {
+                    showError(data.error || 'Failed to submit answer.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Answer';
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Answer';
+                console.error('Submit answer error:', error);
+            }
+        }
+
+        // Display feedback
+        function displayFeedback(data) {
+            const content = `
+                <div class="question-container">
+                    <div class="feedback-box">
+                        <div class="feedback-title">
+                            <i class="fas fa-star"></i> Score: ${data.score}/${data.max_score}
+                        </div>
+                        <div class="feedback-text">${data.feedback}</div>
+                    </div>
+                    <div style="margin-top: 20px; padding: 15px; background: #f9fafb; border-radius: 6px;">
+                        <strong>Total Progress:</strong> ${data.total_score}/${data.session_max_score}
+                    </div>
+                    <div class="modal-actions">
+                        <button class="modal-btn modal-btn-primary" onclick="loadNextQuestion()">
+                            Next Question <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            showModal('Feedback', content);
+        }
+
+        // Show interview results
+        async function showInterviewResults() {
+            if (!currentSessionId) return;
+
+            showModal('Loading Results', '<div class="loading-spinner"><div class="spinner"></div><p>Calculating final results...</p></div>');
+
+            try {
+                const response = await fetch(`/interviews/cv-interview/session/${currentSessionId}/results/`);
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    displayResults(data);
+                } else {
+                    showError(data.error || 'Failed to load results.');
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+                console.error('Results error:', error);
+            }
+        }
+
+        // Display results
+        function displayResults(data) {
+            const questionsHTML = data.questions.map(q => `
+                <div class="detail-row">
+                    <span><strong>Q${q.question_number}:</strong> ${q.question.substring(0, 50)}...</span>
+                    <span style="color: #2563eb; font-weight: 600;">${q.score}/${q.max_score}</span>
+                </div>
+            `).join('');
+
+            const content = `
+                <div class="results-summary">
+                    <i class="fas fa-trophy" style="font-size: 3rem; color: #f59e0b; margin-bottom: 15px;"></i>
+                    <h2>Interview Completed!</h2>
+                    <div class="results-score">${data.score_percentage}%</div>
+                    <div class="results-grade">${data.performance_grade}</div>
+                    
+                    <div class="results-details">
+                        <div class="detail-row">
+                            <span><strong>Total Score:</strong></span>
+                            <span>${data.total_score}/${data.max_score}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span><strong>Questions Answered:</strong></span>
+                            <span>${data.answered_questions}/${data.total_questions}</span>
+                        </div>
+                        ${questionsHTML}
+                    </div>
+                    
+                    <div class="modal-actions" style="justify-content: center; margin-top: 30px;">
+                        <button class="modal-btn modal-btn-secondary" onclick="closeInterviewModal()">Close</button>
+                        <button class="modal-btn modal-btn-primary" onclick="location.reload()">Start New Interview</button>
+                    </div>
+                </div>
+            `;
+            showModal('Interview Results', content);
+        }
+
+        // Modal functions
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content;
+            document.getElementById('interviewModal').style.display = 'block';
+        }
+
+        function closeInterviewModal() {
+            document.getElementById('interviewModal').style.display = 'none';
+        }
+
+        function showError(message) {
+            const content = `<div class="error-message"><i class="fas fa-exclamation-circle"></i> ${message}</div>`;
+            document.getElementById('modalBody').innerHTML += content;
+        }
+
+        function showSuccess(message) {
+            const content = `<div class="success-message"><i class="fas fa-check-circle"></i> ${message}</div>`;
+            document.getElementById('modalBody').innerHTML = content;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('interviewModal');
+            if (event.target == modal) {
+                closeInterviewModal();
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -133,6 +133,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'interviews' / 'static',
 ]
 
+# Media files (User uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 

@@ -227,3 +227,9 @@ def interview_detail(request, session_id):
         'questions': questions,
     }
     return render(request, 'interviews/interview_detail.html', context)
+
+
+@login_required(login_url='users:auth')
+def cv_interview(request):
+    """CV Interview page"""
+    return render(request, 'interviews/cv_interview.html')

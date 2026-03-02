@@ -15,6 +15,9 @@ urlpatterns = [
     path('history/', interview_history, name='interview_history'),
     path('history/<int:session_id>/', interview_detail, name='interview_detail'),
     
+    # CV Interview feature (RAG-based)
+    path('cv-interview/', include('interviews.urls_cv_interview')),
+    
     # API endpoints for interview functionality
     path('api/start-interview/', start_new_interview, name='start_new_interview'),
     path('api/save-answer/', save_question_answer, name='save_question_answer'),

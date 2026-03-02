@@ -1,265 +1,370 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In / Sign Up - JobViewWebsite</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-purple': '#6366f1',
-                        'brand-purple-dark': '#4f46e5',
-                    }
-                }
-            }
+
+{% block title %}Sign In - Interview AI Platform{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Modal Overlay */
+    .auth-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .auth-modal-overlay.active {
+        display: flex;
+    }
+    
+    /* Modal Container */
+    .auth-modal {
+        background: white;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 480px;
+        position: relative;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: modalSlideIn 0.3s ease-out;
+    }
+    
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
         }
-    </script>
-</head>
-<body style="background-color: #050505;" class=" min-h-screen">
-    <!-- Messages/Alerts -->
-    {% if messages %}
-    <div class="fixed top-4 right-4 z-50">
-        {% for message in messages %}
-        <div class="bg-blue-500 text-white px-4 py-3 rounded-lg shadow-lg mb-2 flex items-center justify-between">
-            <span>{{ message }}</span>
-            <button type="button" class="ml-4 text-white hover:text-gray-200" onclick="this.parentElement.remove()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        {% endfor %}
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Modal Header */
+    .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: #999;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+    
+    .modal-close:hover {
+        color: #333;
+    }
+    
+    .modal-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #000;
+        text-align: center;
+        margin: 0 0 30px 0;
+        padding: 30px 40px 0 40px;
+    }
+    
+    /* Modal Body */
+    .modal-body {
+        padding: 0 40px 40px 40px;
+    }
+    
+    /* Form Groups */
+    .form-label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        text-transform: capitalize;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-family: 'Montserrat', sans-serif;
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: #000;
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-input::placeholder {
+        color: #999;
+    }
+    
+    /* Checkbox */
+    .form-checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .form-checkbox {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+    
+    .form-checkbox-label {
+        font-size: 0.9rem;
+        color: #666;
+        cursor: pointer;
+    }
+    
+    .form-checkbox-label a {
+        color: #000;
+        text-decoration: underline;
+    }
+    
+    /* Submit Button */
+    .btn-auth-submit {
+        width: 100%;
+        background: #000;
+        color: #fff;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 20px;
+    }
+    
+    .btn-auth-submit:hover {
+        background: #333;
+        transform: translateY(-2px);
+    }
+    
+    /* Footer Links */
+    .modal-footer-text {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #666;
+    }
+    
+    .modal-footer-text a {
+        color: #000;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .modal-footer-text a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Forgot Password Link */
+    .forgot-password-link {
+        text-align: right;
+        margin-top: -10px;
+        margin-bottom: 20px;
+    }
+    
+    .forgot-password-link a {
+        font-size: 0.9rem;
+        color: #000;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .forgot-password-link a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Remember Me */
+    .remember-me-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    
+    @media (max-width: 768px) {
+        .auth-modal {
+            max-width: 90%;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            padding: 25px 25px 0 25px;
+        }
+        
+        .modal-body {
+            padding: 0 25px 30px 25px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Messages/Alerts -->
+{% if messages %}
+<div class="fixed top-20 right-4 z-50">
+    {% for message in messages %}
+    <div class="bg-blue-500 text-white px-4 py-3 rounded-lg shadow-lg mb-2 flex items-center justify-between">
+        <span>{{ message }}</span>
+        <button type="button" class="ml-4 text-white hover:text-gray-200" onclick="this.parentElement.remove()">
+            <i class="fas fa-times"></i>
+        </button>
     </div>
-    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
 
-    <!-- Sign In Page -->
-    <div class="min-h-screen flex items-center justify-center p-3 lg:p-6 auth-page" id="signinPage">
-        <div class="w-full max-w-6xl bg-gray-800 rounded-3xl shadow-2xl overflow-hidden flex auth-content">
-            <!-- Image Section -->
-            <div class="lg:flex lg:w-1/2 relative overflow-hidden image-section hidden min-h-screen" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);">
-                <div class="absolute inset-0 bg-black opacity-20"></div>
-                <div class="pb-6 relative z-10 flex flex-col justify-center px-8 xl:px-12 text-white">
-                    <!-- Brand Header -->
-                    <div class="flex items-center mb-12 gap-3">
-                        <div class="flex items-center space-x-3 mb-2 pt-8">
-                            <div class="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-briefcase text-white text-lg"></i>
-                            </div>
-                            <span class="text-xl font-bold">CareerConnect AI</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Brand Main -->
-                    <div class="mb-12">
-                        <h1 class="text-4xl xl:text-5xl font-bold leading-tight mb-6">
-                            Unlock Your</br>
-                            <span class="text-indigo-200">Career Potential</span></br> with AI.
-                        </h1>
-                        <p class="text-lg xl:text-xl text-indigo-100/80 leading-relaxed">
-                            Join thousands of professionals using our AI-driven interview preparation and smart job matching platform.
-                        </p>
-                    </div>
-                    
-                    <!-- Testimonial -->
-                    <div class="bg-black/20 text-lg max-w-md  rounded-2xl p-6 border border-white/10 leading-related font-light">
-                        <div class="flex items-center space-x-2 gap-4 mb-4 pb-4">
-                            <div class="flex -space-x-2">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-sm">👨‍💼</div>
-                                <div class="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-sm">👩‍💻</div>
-                                <div class="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-sm">👨‍🎓</div>
-                            </div>
-                            <div class="text-white text-sm"><span class="font-bold">4.8/5</span> from 12k+ professionals</div>
-                        </div>
-                        <p class="text-indigo-50/90 italic text-sm leading-relaxed">
-                            "The AI technical interviews felt incredibly realistic and helped me land my dream job at TechCorp!"
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Form Section -->
-            <div class="flex-1 lg:w-1/2 bg-gray-900 flex items-center justify-center p-6 form-section">
-                <div class="w-full max-w-md form-wrapper">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl font-bold text-white mb-2">Master interviews with AI assistance.</h2>
-                        <p class="text-gray-400 form-subtitle">"Prepare. Connect. Where talent meets opportunity - your path to the right job."</p>
-                    </div>
-
-                    <form method="POST" id="signinForm" class="space-y-4 auth-form">
-                        {% csrf_token %}
-                        <input type="hidden" name="form_type" value="signin">
-                        
-                        <div class="form-group">
-                            <input type="email" id="signin-email" name="email" placeholder="Email" required
-                                   class="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent focus:outline-none transition duration-200">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="password" id="signin-password" name="password" placeholder="Password" required
-                                   class="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent focus:outline-none transition duration-200">
-                        </div>
-
-                        <button type="submit" class="w-full bg-gradient-to-r from-brand-purple to-brand-purple-dark text-white font-bold py-3 rounded-lg hover:from-brand-purple-dark hover:to-purple-800 transform hover:scale-105 transition duration-200 btn-submit">
-                            SIGN IN
-                        </button>
-                    </form>
-
-                    <div class="relative my-6 divider">
-                        <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t border-gray-600"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="bg-gray-900 px-3 text-gray-400 font-medium">or sign in with</span>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3 mb-6 social-buttons">
-                        <button class="flex items-center justify-center space-x-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white py-3 px-4 rounded-lg transition duration-200 btn-google">
-                            <i class="fab fa-google text-white"></i>
-                            <span class="text-sm font-medium">Google</span>
-                        </button>
-                        <button class="flex items-center justify-center space-x-2 bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white py-3 px-4 rounded-lg transition duration-200 btn-facebook">
-                            <i class="fab fa-linkedin-in text-white"></i>
-                            <span class="text-sm font-medium">LinkedIn</span>
-                        </button>
-                    </div>
-
-                    <div class="text-center form-footer">
-                        <span class="text-gray-400">Don't have an account?</span>
-                        <a href="#" id="switchToSignup" class="text-brand-purple hover:text-brand-purple-dark font-medium ml-1">Sign Up</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sign Up Page -->
-    <div class="min-h-screen flex items-center justify-center p-3 lg:p-6 hidden auth-page" id="signupPage">
-        <div class="w-full max-w-6xl bg-gray-800 rounded-3xl shadow-2xl overflow-hidden flex auth-content">
-            <!-- Image Section -->
-            <div class=" hidden lg:flex lg:w-1/2 bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 relative overflow-hidden image-section">
-                <div class="absolute inset-0 bg-black opacity-20"></div>
-                <div class="relative z-10 flex flex-col justify-center px-8 xl:px-12 text-white">
-                    <!-- Brand Header -->
-                    <div class="mb-8">
-                        <div class="flex items-center space-x-3 mb-2">
-                            <div class="w-8 h-8 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-briefcase text-white text-lg"></i>
-                            </div>
-                            <span class="text-xl font-bold">CareerConnect AI</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Brand Main -->
-                    <div class="mb-12">
-                        <h1 class="text-4xl xl:text-5xl font-bold leading-tight mb-6">
-                            Practice, improve, and land your dream job.
-                        </h1>
-                        <p class="text-lg xl:text-xl text-purple-100 leading-relaxed">
-                            "Prepare. Connect. Where talent meets opportunity - your path to the right job."
-                        </p>
-                    </div>
-                    
-                    <!-- Testimonial -->
-                    <div class="bg-white bg-opacity-10 rounded-2xl backdrop-blur-sm pb-10">
-                        <div class="flex items-center space-x-2 mb-4">
-                            <div class="flex -space-x-2">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-sm">👨‍💼</div>
-                                <div class="w-8 h-8 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-sm">👩‍💻</div>
-                                <div class="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-sm">👨‍🎓</div>
-                            </div>
-                            <div class="text-purple-100 font-semibold">4.8/5 from 12k+ professionals</div>
-                        </div>
-                        <p class="text-purple-100 italic">
-                            "The personalized feedback helped me improve my technical communication skills dramatically!"
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Form Section -->
-            <div class="flex-1 lg:w-1/2 bg-gray-900 flex items-center justify-center p-6 form-section">
-                <div class="w-full max-w-md form-wrapper">
-                    <div class="text-center mb-8">
-                        <h2 class="text-3xl font-bold text-white mb-2">Practice, improve, and land your dream job.</h2>
-                        <p class="text-gray-400 form-subtitle">"Prepare. Connect. Where talent meets opportunity - your path to the right job."</p>
-                    </div>
-
-                    <form method="POST" id="signupForm" class="space-y-4 auth-form">
-                        {% csrf_token %}
-                        <input type="hidden" name="form_type" value="signup">
-                        
-                        <div class="form-group">
-                            <input type="text" id="signup-name" name="name" placeholder="Your Name" required
-                                   class="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent focus:outline-none transition duration-200">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="email" id="signup-email" name="email" placeholder="Email Address" required
-                                   class="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent focus:outline-none transition duration-200">
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4 form-row">
-                            <div class="form-group">
-                                <input type="password" id="signup-password" name="password" placeholder="Password" required
-                                       class="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent focus:outline-none transition duration-200">
-                            </div>
-                            <div class="form-group">
-                                <input type="password" id="signup-confirm-password" name="confirm_password" placeholder="Confirmation" required
-                                       class="w-full bg-gray-700 border border-gray-600 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent focus:outline-none transition duration-200">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full bg-gradient-to-r from-brand-purple to-brand-purple-dark text-white font-bold py-3 rounded-lg hover:from-brand-purple-dark hover:to-purple-800 transform hover:scale-105 transition duration-200 btn-submit">
-                            CREATE AN ACCOUNT
-                        </button>
-                    </form>
-
-                    <div class="text-center form-footer mt-6">
-                        <span class="text-gray-400">Already have an account?</span>
-                        <a href="#" id="switchToSignin" class="text-brand-purple hover:text-brand-purple-dark font-medium ml-1">Sign In</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const signinPage = document.getElementById('signinPage');
-        const signupPage = document.getElementById('signupPage');
-        const switchToSignup = document.getElementById('switchToSignup');
-        const switchToSignin = document.getElementById('switchToSignin');
-
-        switchToSignup.addEventListener('click', (e) => {
-            e.preventDefault();
-            signinPage.classList.add('hidden');
-            signupPage.classList.remove('hidden');
-        });
-
-        switchToSignin.addEventListener('click', (e) => {
-            e.preventDefault();
-            signupPage.classList.add('hidden');
-            signinPage.classList.remove('hidden');
-        });
-
-        // Toggle password visibility
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const icon = input.parentElement.querySelector('.cursor-pointer i');
+<!-- Sign In Modal -->
+<div class="auth-modal-overlay active" id="signinModalOverlay">
+    <div class="auth-modal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        
+        <h2 class="modal-title">Welcome back</h2>
+        
+        <div class="modal-body">
+            <p style="text-align: center; color: #666; margin-bottom: 25px; font-size: 0.95rem;">Please enter your details to sign in.</p>
             
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
+            <form method="POST" id="signinForm">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="signin">
+                
+                <div>
+                    <label class="form-label">EMAIL ADDRESS</label>
+                    <input type="email" name="email" placeholder="you@example.com" required class="form-input">
+                </div>
+                
+                <div>
+                    <label class="form-label">PASSWORD</label>
+                    <input type="password" name="password" placeholder="••••••••" required class="form-input">
+                </div>
+                
+                <div class="remember-me-group">
+                    <div class="form-checkbox-group" style="margin-bottom: 0;">
+                        <input type="checkbox" id="remember-me" class="form-checkbox">
+                        <label for="remember-me" class="form-checkbox-label">Remember me</label>
+                    </div>
+                    <a href="#" style="font-size: 0.9rem; color: #000; text-decoration: none; font-weight: 500;">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn-auth-submit">SIGN IN</button>
+            </form>
+            
+            <div class="modal-footer-text">
+                Don't have an account? <a onclick="switchToSignup()">Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sign Up Modal -->
+<div class="auth-modal-overlay" id="signupModalOverlay">
+    <div class="auth-modal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        
+        <h2 class="modal-title">Create an account</h2>
+        
+        <div class="modal-body">
+            <form method="POST" id="signupForm">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="signup">
+                
+                <div>
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" placeholder="User name" required class="form-input">
+                </div>
+                
+                <div>
+                    <label class="form-label">Email address</label>
+                    <input type="email" name="email" placeholder="you@example.com" required class="form-input">
+                </div>
+                
+                <div>
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" placeholder="Min 6 chars, 1 uppercase, 1 lowercase..." required class="form-input">
+                </div>
+                
+                <div class="form-checkbox-group">
+                    <input type="checkbox" id="terms" required class="form-checkbox">
+                    <label for="terms" class="form-checkbox-label">
+                        By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-auth-submit">CREATE ACCOUNT</button>
+            </form>
+            
+            <div class="modal-footer-text">
+                Already have an account? <a onclick="switchToSignin()">Sign in</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Modal functions
+    function closeModal() {
+        document.getElementById('signinModalOverlay').classList.remove('active');
+        document.getElementById('signupModalOverlay').classList.remove('active');
+    }
+    
+    function openSignin() {
+        document.getElementById('signupModalOverlay').classList.remove('active');
+        document.getElementById('signinModalOverlay').classList.add('active');
+    }
+    
+    function openSignup() {
+        document.getElementById('signinModalOverlay').classList.remove('active');
+        document.getElementById('signupModalOverlay').classList.add('active');
+    }
+    
+    function switchToSignup() {
+        event.preventDefault();
+        openSignup();
+    }
+    
+    function switchToSignin() {
+        event.preventDefault();
+        openSignin();
+    }
+    
+    // Close modal when clicking outside
+    document.getElementById('signinModalOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
         }
-    </script>
-</body>
-</html>
+    });
+    
+    document.getElementById('signupModalOverlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+</script>
+
+{% endblock %}

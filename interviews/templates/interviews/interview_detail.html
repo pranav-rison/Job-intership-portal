@@ -461,7 +461,7 @@
                     <span class="icon">📊</span> Dashboard
                 </a>
                 <a href="{% url 'application:applied_companies' %}" class="nav-item">
-                    <span class="icon">🏢</span> Applied Companies
+                    <span class="icon">✅</span> Completed Interviews
                 </a>
                 <a href="{% url 'application:apply_companies' %}" class="nav-item">
                     <span class="icon">📝</span> Apply to Companies
@@ -471,6 +471,9 @@
                 </a>
                 <a href="{% url 'interviews:interview_history' %}" class="nav-item active">
                     <span class="icon">📜</span> History of AI
+                </a>
+                <a href="{% url 'interviews:cv_interview' %}" class="nav-item">
+                    <span class="icon">📋</span> CV Interview
                 </a>
             </nav>
             <div class="sidebar-footer">
