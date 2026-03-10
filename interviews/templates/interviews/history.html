@@ -180,13 +180,13 @@
 
         .stat-card:hover {
             transform: translateY(-2px);
-            border-color: #6366f1;
+            border-color: #2563eb;
         }
 
         .stat-number {
             font-size: 32px;
             font-weight: 700;
-            color: #6366f1;
+            color: #2563eb;
             margin-bottom: 8px;
         }
 
@@ -238,7 +238,7 @@
 
         .filter-btn {
             padding: 8px 16px;
-            background: #6366f1;
+            background: #2563eb;
             color: white;
             border: none;
             border-radius: 6px;
@@ -248,7 +248,7 @@
         }
 
         .filter-btn:hover {
-            background: #4f46e5;
+            background: #1d4ed8;
         }
 
         .history-container {
@@ -276,7 +276,7 @@
         .interview-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            border-color: #c7d2fe;
+            border-color: #93c5fd;
         }
 
         .card-left {
@@ -296,7 +296,7 @@
             color: #2c3e50;
             margin-bottom: 4px;
             line-height: 1.3;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Playfair Display', serif;
             letter-spacing: -0.5px;
         }
 
@@ -310,7 +310,7 @@
             text-transform: uppercase;
             margin-bottom: 4px;
             letter-spacing: 1.2px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Playfair Display', serif;
             font-weight: 600;
         }
 
@@ -371,20 +371,20 @@
         .performance-score {
             font-size: 40px;
             font-weight: 700;
-            color: #6366f1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2563eb;
+            font-family: 'Playfair Display', serif;
         }
 
         .score-total {
             font-size: 16px;
             color: #6b7280;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Playfair Display', serif;
         }
 
         .view-questions-btn {
             background: transparent;
-            color: #6c72f7;
-            border: 2px solid #6c72f7;
+            color: #2563eb;
+            border: 2px solid #2563eb;
             border-radius: 999px;
             padding: 8px 18px;
             font-size: 15px;
@@ -404,9 +404,9 @@
         }
 
         .view-questions-btn:hover {
-            background: #6c72f7;
+            background: #2563eb;
             color: #fff;
-            border-color: #6c72f7;
+            border-color: #2563eb;
             text-decoration: none;
             transform: none;
         }
@@ -436,7 +436,7 @@
 
         .start-interview-btn {
             padding: 12px 24px;
-            background: #6366f1;
+            background: #2563eb;
             color: white;
             border: none;
             border-radius: 8px;
@@ -450,7 +450,7 @@
         }
 
         .start-interview-btn:hover {
-            background: #4f46e5;
+            background: #1d4ed8;
             color: white;
             text-decoration: none;
         }
@@ -464,17 +464,17 @@
 
         .pagination a, .pagination .current {
             padding: 8px 12px;
-            background: #1a1a1a;
-            border: 1px solid #333333;
+            background: #ffffff;
+            border: 1px solid #e1e8ed;
             border-radius: 6px;
-            color: #cccccc;
+            color: #2c3e50;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .pagination a:hover, .pagination .current {
-            background: #6366f1;
-            border-color: #6366f1;
+            background: #2563eb;
+            border-color: #2563eb;
             color: white;
         }
 
@@ -556,11 +556,8 @@
                 <a href="{% url 'users:user_dashboard' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                     <i class="fas fa-chart-line"></i> Dashboard
                 </a>
-                <a href="{% url 'application:applied_companies' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                    <i class="fas fa-clipboard-check"></i> Completed Interviews
-                </a>
                 <a href="{% url 'application:apply_companies' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                    <i class="fas fa-paper-plane"></i> Apply to Companies
+                    <i class="fas fa-microphone"></i> Practice Interviews
                 </a>
                 <a href="{% url 'interviews:start_interview' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                     <i class="fas fa-robot"></i> Interview AI
@@ -617,6 +614,8 @@
                         <label class="filter-label">Filter by Role:</label>
                         <select name="role" class="filter-select">
                             <option value="">All Roles</option>
+                            <option value="random_topics">Random Topics (mixed questions)</option>
+                            <option value="single_topic">Single Topic</option>
                             {% for role in all_roles %}
                                 <option value="{{ role }}" {% if current_role_filter == role %}selected{% endif %}>
                                     {{ role }}

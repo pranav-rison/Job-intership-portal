@@ -31,6 +31,7 @@
             min-height: 100vh;
         }
 
+        /* Sidebar */
         .sidebar {
             width: 250px;
             background: #ffffff;
@@ -43,12 +44,12 @@
             overflow-y: auto;
             border-right: 1px solid #e1e8ed;
             box-shadow: 2px 0 8px rgba(0,0,0,0.05);
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
 
         .sidebar::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
         }
 
         .sidebar-brand {
@@ -133,6 +134,7 @@
             color: white;
         }
 
+        /* Main Content */
         .main-content {
             margin-left: 250px;
             flex: 1;
@@ -141,69 +143,269 @@
             background-color: #f5f7fa;
         }
 
+        /* Hero Section */
         .hero-section {
-            margin-bottom: 30px;
-            padding: 20px 0;
+            margin-bottom: 40px;
+            padding: 30px 35px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 16px;
+            border: 1px solid #e1e8ed;
+            box-shadow: 0 2px 12px rgba(37, 99, 235, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
         }
 
         .hero-title {
-            font-size: 32px;
+            font-size: 42px;
             font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            color: #1e293b;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+            line-height: 1.2;
         }
 
         .hero-subtitle {
-            font-size: 15px;
-            color: #6c7a89;
+            font-size: 17px;
+            color: #64748b;
             margin-bottom: 0;
-            line-height: 1.5;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .hero-subtitle .username {
             color: #2563eb;
             font-weight: 700;
+            font-size: 18px;
         }
 
+        /* API Key Box */
+        .api-key-box {
+            background: #ffffff;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            padding: 24px;
+            min-width: 350px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .api-key-box:hover {
+            border-color: #2563eb;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
+        }
+
+        .api-key-box h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .api-key-box h3 i {
+            color: #2563eb;
+        }
+
+        .api-key-box p {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .api-key-input-group {
+            margin-bottom: 12px;
+        }
+
+        .api-key-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .api-key-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1e293b;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .api-key-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .api-apply-btn {
+            width: 100%;
+            padding: 11px 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .api-apply-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .api-apply-btn i {
+            font-size: 16px;
+        }
+
+        /* Stats Cards Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 28px 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #e1e8ed;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+            border-color: #93c5fd;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover .stat-icon {
+            transform: scale(1.05);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: -0.5px;
+        }
+
+        /* Dashboard Sections */
         .dashboard-section {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 28px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
             border: 1px solid #e1e8ed;
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-section:hover {
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f1f5f9;
         }
 
         .section-header h2 {
-            color: #2c3e50;
+            color: #1e293b;
             margin-bottom: 0;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         .edit-btn {
-            color: #2c3e50;
+            color: #2563eb;
             text-decoration: none;
             font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            border: 1px solid #e1e8ed;
+            padding: 9px 18px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid #2563eb;
             font-size: 14px;
+            background: transparent;
         }
 
         .edit-btn:hover {
-            background-color: #000000;
+            background-color: #2563eb;
             color: white;
             text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         }
 
         .student-detail {
@@ -215,8 +417,16 @@
         .profile-avatar img {
             width: 120px;
             height: 120px;
-            border-radius: 0;
-            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            border: 3px solid #e1e8ed;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .profile-avatar img:hover {
+            transform: scale(1.02);
+            border-color: #2563eb;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
         }
 
         .student-info {
@@ -224,52 +434,60 @@
         }
 
         .info-item {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .info-item label {
             display: block;
             font-weight: 600;
-            color: #6c7a89;
-            margin-bottom: 5px;
-            font-size: 11px;
-            letter-spacing: 1px;
+            color: #64748b;
+            margin-bottom: 6px;
+            font-size: 12px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
         }
 
         .info-item p {
-            color: #2c3e50;
+            color: #1e293b;
             font-size: 18px;
             margin: 0;
             font-weight: 600;
+            letter-spacing: -0.2px;
         }
 
         .section-description {
-            color: #6c7a89;
-            margin-bottom: 25px;
-            font-size: 14px;
-            line-height: 1.5;
+            color: #64748b;
+            margin-bottom: 28px;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .graphs-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 25px;
+            gap: 28px;
         }
 
         .graph-card {
             background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
+            padding: 32px;
+            border-radius: 16px;
             border: 1px solid #e1e8ed;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .graph-card:hover {
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.12);
+            transform: translateY(-2px);
         }
 
         .graph-card h3 {
-            color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 18px;
+            color: #1e293b;
+            margin-bottom: 10px;
+            font-size: 19px;
             font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         .graph-subtitle {
@@ -299,7 +517,25 @@
                 padding: 20px;
             }
 
+            .hero-section {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .api-key-box {
+                min-width: 100%;
+                width: 100%;
+            }
+
+            .hero-title {
+                font-size: 32px;
+            }
+
             .graphs-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -334,9 +570,6 @@
                             <a href="{% url 'users:user_dashboard' %}" class="nav-item active" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                                 <i class="fas fa-chart-line"></i> Dashboard
                                 </a>
-                                <a href="{% url 'application:applied_companies' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                                    <i class="fas fa-clipboard-check"></i> Completed Interviews
-                                </a>
                                 <a href="{% url 'application:apply_companies' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                                     <i class="fas fa-microphone"></i> Practice Interviews
                                 </a>
@@ -363,16 +596,66 @@
         <!-- Main Content -->
         <main class="main-content">
             <!-- Hero Section -->
-            <div class="hero-section" style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
+            <div class="hero-section">
+                <div class="hero-content">
                     <h1 class="hero-title">User Dashboard</h1>
                     <p class="hero-subtitle">Welcome back, <span class="username">{{ user.first_name|default:user.username }}</span>. Here is your career progress.</p>
+                </div>
+                <div class="api-key-box">
+                    <h3><i class="fas fa-key"></i> API Configuration</h3>
+                    <p>Configure AI service for interviews (ChatGPT, Gemini, Groq)</p>
+                    <div class="api-key-input-group">
+                        <label class="api-key-label">API Key</label>
+                        <input type="password" class="api-key-input" placeholder="Enter your API key" id="apiKeyInput">
+                    </div>
+                    <button class="api-apply-btn" id="applyApiBtn">
+                        <i class="fas fa-check-circle"></i>
+                        Apply
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #2563eb;">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-label">Total Interviews</div>
+                    <div class="stat-value">{{ total_interviews|default:0 }}</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #10b981;">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="stat-label">Avg Score</div>
+                    <div class="stat-value">{{ avg_score|default:0|floatformat:0 }}%</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #f59e0b;">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-label">Overall Ranking</div>
+                    <div class="stat-value">Top 2%</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #8b5cf6;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-label">No of Users</div>
+                    <div class="stat-value">{{ total_users|default:0 }}</div>
                 </div>
             </div>
 
             <!-- Student Detail Section -->
-            <section class="dashboard-section" style="position: relative; padding-top: 50px;">
-                <a href="#" class="edit-btn" style="position: absolute; top: 15px; right: 15px;">EDIT PROFILE</a>
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2>Profile Information</h2>
+                    <a href="#" class="edit-btn">Edit Profile</a>
+                </div>
                 <div class="student-detail">
                     <div class="profile-avatar">
                         <img src="{% static 'images/first.jpg' %}" alt="Profile">
@@ -387,21 +670,18 @@
                             <p>{{ user.email }}</p>
                         </div>
                     </div>
-                    <div style="margin-left: auto; text-align: right;">
-                        <div class="info-item">
-                            <label>OVERALL RANKING</label>
-                            <p style="color: #2563eb;">Top 2%</p>
-                        </div>
-                    </div>
                 </div>
             </section>
 
             <!-- Graphs Section -->
             <section class="dashboard-section">
+                <div class="section-header">
+                    <h2>Performance Analytics</h2>
+                </div>
                 <div class="graphs-container">
                     <!-- CV Interview Results Card -->
                     <div class="graph-card">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 0.25rem; color: #000000;">CV Interview Performance</h3>
+                        <h3>CV Interview Performance</h3>
                         <p class="graph-subtitle">RESUME-BASED INTERVIEW SCORES OVER TIME</p>
                         <canvas id="cvInterviewResultsChart"></canvas>
                         {% if total_interviews == 0 %}
@@ -413,7 +693,7 @@
 
                     <!-- Skill Radar Card -->
                     <div class="graph-card">
-                        <h3 style="font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 0.25rem; color: #000000;">Soft Skill Radar</h3>
+                        <h3>Soft Skill Radar</h3>
                         <p class="graph-subtitle">ADAPTABILITY & LEADERSHIP ASSESSMENT</p>
                         <canvas id="skillRadarChart"></canvas>
                     </div>
@@ -577,6 +857,13 @@
                 plugins: {
                     legend: { 
                         display: false
+                    },
+                    tooltip: {
+                        backgroundColor: '#2c3e50',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        padding: 12,
+                        cornerRadius: 8
                     }
                 },
                 scales: {

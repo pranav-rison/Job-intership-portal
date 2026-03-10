@@ -14,11 +14,15 @@ urlpatterns = [
     path('delete-resume/<int:resume_id>/', views_cv_interview.delete_resume, name='delete_resume'),
     
     # Interview session management
-    path('start-interview/', views_cv_interview.start_cv_interview, name='start_interview'),
-    path('session/<int:session_id>/next-question/', views_cv_interview.get_next_question, name='next_question'),
-    path('submit-answer/', views_cv_interview.submit_answer, name='submit_answer'),
+    path('start-interview/', views_cv_interview.start_cv_interview, name='cv_start_interview'),
+    path('session/<int:session_id>/next-question/', views_cv_interview.get_next_question, name='cv_next_question'),
+    path('submit-answer/', views_cv_interview.submit_answer, name='cv_submit_answer'),
     
     # Results and history
-    path('session/<int:session_id>/results/', views_cv_interview.get_interview_results, name='interview_results'),
-    path('history/', views_cv_interview.get_cv_interview_history, name='interview_history'),
+    path('session/<int:session_id>/results/', views_cv_interview.get_interview_results, name='cv_interview_results'),
+    path('history/', views_cv_interview.get_cv_interview_history, name='cv_interview_history'),
 ]
+
+
+
+

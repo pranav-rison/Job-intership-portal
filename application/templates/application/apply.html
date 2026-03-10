@@ -138,14 +138,17 @@
             padding: 40px;
             overflow-y: auto;
             background-color: #f5f7fa;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
         }
 
         .hero-section {
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 0;
+            padding: 35px 0;
         }
 
         .hero-content {
@@ -153,18 +156,26 @@
         }
 
         .hero-title {
-            font-size: 36px;
+            font-size: 48px;
             font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-title-italic {
+            font-style: italic;
+            color: #2563eb;
+            font-weight: 600;
         }
 
         .hero-subtitle {
-            font-size: 16px;
-            color: #5a5a5a;
+            font-size: 17px;
+            color: #4a5568;
             margin-bottom: 0;
-            line-height: 1.5;
+            line-height: 1.6;
+            max-width: 600px;
         }
 
         .stats-container {
@@ -180,6 +191,22 @@
             border: none;
             box-shadow: none;
             min-width: auto;
+            position: relative;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(180deg, transparent, #d1d5db, transparent);
+        }
+
+        .stat-card:last-child::after {
+            display: none;
         }
 
         .stat-card:hover {
@@ -188,28 +215,24 @@
         }
 
         .stat-number {
-            font-size: 42px;
-            font-weight: 400;
-            color: #000000;
+            font-size: 46px;
+            font-weight: 700;
+            color: #1a1a1a;
             line-height: 1;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
             font-size: 11px;
-            color: #000000;
-            font-weight: 500;
+            color: #6b7280;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-card.remote .stat-number {
-            color: #000000;
-        }
-
-        .stat-card.companies .stat-number {
-            color: #000000;
+            letter-spacing: 1.5px;
         }
 
         .placeholder-content {
@@ -233,95 +256,6 @@
         }
 
         /* Job Listing Styles */
-        .search-section {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid #e1e8ed;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .search-bar {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .search-input-wrapper {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-input-wrapper i {
-            position: absolute;
-            left: 15px;
-            color: #6b7280;
-            font-size: 16px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 15px 12px 45px;
-            background: #ffffff;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            color: #2c3e50;
-            font-size: 14px;
-        }
-
-        .search-input::placeholder {
-            color: #9ca3af;
-        }
-
-        .filter-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .filter-wrapper i {
-            position: absolute;
-            left: 15px;
-            color: #6b7280;
-            font-size: 16px;
-            pointer-events: none;
-        }
-
-        .filter-select {
-            padding: 12px 15px 12px 45px;
-            background: #ffffff;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            color: #2c3e50;
-            font-size: 14px;
-            min-width: 180px;
-            cursor: pointer;
-        }
-
-        .search-btn {
-            padding: 12px 30px;
-            background: #000000;
-            color: white;
-            border: none;
-            border-radius: 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .search-btn:hover {
-            background: #ffffff;
-            color: #000000;
-            border: 1px solid #000000;
-        }
-
         .content-layout {
             display: grid;
             grid-template-columns: 1fr 300px;
@@ -331,136 +265,283 @@
         .jobs-container {
             display: flex;
             flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .welcome-header {
+            display: flex;
+            align-items: center;
             gap: 20px;
         }
 
-        .job-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 25px;
-            border: 1px solid #e1e8ed;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .job-card:hover {
-            border-color: #6366f1;
-            transform: translateY(-2px);
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .job-left {
-            display: flex;
-            gap: 15px;
-        }
-
-        .company-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 8px;
+        .welcome-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 20px;
+            font-size: 36px;
+            backdrop-filter: blur(10px);
         }
 
-        .job-info h3 {
-            color: #2c3e50;
-            font-size: 18px;
-            margin-bottom: 5px;
+        .welcome-content h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
-        .company-location {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 10px;
+        .welcome-content p {
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 400;
         }
 
-        .salary {
-            color: #10b981;
-            font-weight: 600;
-            font-size: 14px;
+        /* How It Works Card */
+        .how-it-works-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
-        .job-description {
-            color: #4b5563;
-            line-height: 1.5;
-            margin: 15px 0;
-            font-size: 14px;
-        }
-
-        .job-tags {
+        .section-title {
+            font-size: 24px;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            font-weight: 700;
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 15px 0;
-        }
-
-        .tag {
-            background: #2563eb;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .job-footer {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            gap: 12px;
         }
 
-        .posted-time {
-            color: #6b7280;
-            font-size: 12px;
-        }
-
-        .apply-btn {
-            background: #6366f1;
-            color: white;
-            padding: 8px 20px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .apply-btn:hover {
-            background: #4f46e5;
-        }
-
-        .view-details-btn {
-            background: transparent;
+        .section-title i {
             color: #6366f1;
-            padding: 8px 20px;
-            border: 1px solid #6366f1;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 10px;
+            font-size: 26px;
         }
 
-        .view-details-btn:hover {
-            background: #6366f1;
-            color: white;
-        }
-
-        .button-group {
+        .steps-container {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 12px;
+            border-left: 4px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            background: #f3f4f6;
+            transform: translateX(5px);
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .step-content h3 {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .step-content p {
+            font-size: 15px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        .step-content strong {
+            color: #6366f1;
+            font-weight: 700;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 17px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            border-radius: 16px;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .cta-content h2 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .cta-content p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 25px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: white;
+            color: #d97706;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-button i {
+            font-size: 22px;
+        }
+
+        /* Topics Preview Card */
+        .topics-preview-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .topic-badge {
+            background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .topic-badge:hover {
+            border-color: #6366f1;
+            background: linear-gradient(135deg, #eef2ff, #dbeafe);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+        }
+
+        .topic-badge i {
+            font-size: 28px;
+            color: #6366f1;
+        }
+
+        .topic-badge span {
+            font-size: 13px;
+            color: #1a1a1a;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .topics-note {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1e40af;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topics-note i {
+            font-size: 18px;
         }
 
         .right-sidebar {
@@ -611,23 +692,28 @@
 
         .load-more {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 35px;
         }
 
         .load-more-btn {
-            background: transparent;
-            color: #6b7280;
-            border: 1px solid #d1d5db;
-            padding: 12px 30px;
-            border-radius: 8px;
+            background: #ffffff;
+            color: #4b5563;
+            border: 2px solid #e5e7eb;
+            padding: 14px 36px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 14px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .load-more-btn:hover {
             border-color: #6366f1;
             color: #6366f1;
+            background: #f9fafb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
         }
 
         @media (max-width: 768px) {
@@ -703,9 +789,6 @@
                 <a href="{% url 'users:user_dashboard' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                     <i class="fas fa-chart-line"></i> Dashboard
                 </a>
-                <a href="{% url 'application:applied_companies' %}" class="nav-item" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                    <i class="fas fa-clipboard-check"></i> Completed Interviews
-                </a>
                 <a href="{% url 'application:apply_companies' %}" class="nav-item active" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
                     <i class="fas fa-microphone"></i> Practice Interviews
                 </a>
@@ -734,8 +817,8 @@
             <!-- Hero Section -->
             <div class="hero-section">
                 <div class="hero-content">
-                    <h1 class="hero-title">Master Your<br><span class="hero-title-italic">Interview Skills</span></h1>
-                    <p class="hero-subtitle">Practice with 500+ AI-powered interview questions across diverse subjects. Build confidence for technical and behavioral interviews.</p>
+                    <h1 class="hero-title">AI-Powered<br><span class="hero-title-italic">Interview Practice</span></h1>
+                    <p class="hero-subtitle">Master your interview skills with our intelligent AI system. Choose between random multi-topic practice or focused single-topic deep dives. Get instant feedback and track your progress.</p>
                 </div>
                 <div class="stats-container">
                     <div class="stat-card">
@@ -744,7 +827,7 @@
                     </div>
                     <div class="stat-card companies">
                         <div class="stat-number">15+</div>
-                        <div class="stat-label">SUBJECTS</div>
+                        <div class="stat-label">TOPICS</div>
                     </div>
                     <div class="stat-card remote">
                         <div class="stat-number">AI-Powered</div>
@@ -753,217 +836,164 @@
                 </div>
             </div>
             
-            <!-- Search Section -->
-            <div class="search-section">
-                <div class="search-bar">
-                    <div class="search-input-wrapper">
-                        <i class="fas fa-search"></i>
-                        <input type="text" class="search-input" placeholder="Search interview topics or subjects">
-                    </div>
-                    <div class="filter-wrapper">
-                        <i class="fas fa-layer-group"></i>
-                        <select class="filter-select">
-                            <option>All Categories</option>
-                            <option>Technical</option>
-                            <option>Behavioral</option>
-                            <option>System Design</option>
-                        </select>
-                    </div>
-                    <div class="filter-wrapper">
-                        <i class="fas fa-signal"></i>
-                        <select class="filter-select">
-                            <option>Difficulty Level</option>
-                            <option>Beginner</option>
-                            <option>Intermediate</option>
-                            <option>Advanced</option>
-                        </select>
-                    </div>
-                    <button class="search-btn">Search</button>
-                </div>
-            </div>
-
+            
             <!-- Content Layout -->
             <div class="content-layout">
-                <!-- Interview Subjects -->
+                <!-- How It Works Section -->
                 <div class="jobs-container">
-                    <!-- Interview Card 1 -->
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-left">
-                                <div class="company-avatar" style="background: #2563eb;"><i class="fas fa-code"></i></div>
-                                <div class="job-info">
-                                    <h3>Data Structures & Algorithms</h3>
-                                    <div class="company-location">Technical • 80 Questions</div>
-                                    <div class="salary">Intermediate to Advanced</div>
-                                </div>
+                    <!-- Welcome Card -->
+                    <div class="welcome-card">
+                        <div class="welcome-header">
+                            <div class="welcome-icon">
+                                <i class="fas fa-robot"></i>
                             </div>
-                        </div>
-                        <div class="job-description">
-                            Master arrays, linked lists, trees, graphs, sorting, searching, dynamic programming, and more. Essential for coding interviews at top tech companies.
-                        </div>
-                        <div class="job-tags">
-                            <span class="tag">Arrays</span>
-                            <span class="tag">Trees</span>
-                            <span class="tag">Graphs</span>
-                            <span class="tag">DP</span>
-                        </div>
-                        <div class="job-footer">
-                            <span class="posted-time">3,200+ completed</span>
-                            <div class="button-group">
-                                <button class="apply-btn">Start Practice</button>
-                                <button class="view-details-btn">View Topics</button>
+                            <div class="welcome-content">
+                                <h2>Welcome to AI Interview Practice</h2>
+                                <p>Your intelligent companion for mastering technical interviews</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Interview Card 2 -->
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-left">
-                                <div class="company-avatar" style="background: #10b981;"><i class="fas fa-project-diagram"></i></div>
-                                <div class="job-info">
-                                    <h3>System Design</h3>
-                                    <div class="company-location">Technical • 45 Questions</div>
-                                    <div class="salary">Advanced Level</div>
+                    <!-- How It Works Section -->
+                    <div class="how-it-works-card">
+                        <h2 class="section-title">
+                            <i class="fas fa-list-check"></i>
+                            How It Works
+                        </h2>
+                        <div class="steps-container">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h3>Start Your Interview</h3>
+                                    <p>Click the "Start AI Interview" button to begin your practice session with our intelligent interviewer.</p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="job-description">
-                            Learn to design scalable distributed systems, databases, caching strategies, load balancing, and microservices architecture for senior-level interviews.
-                        </div>
-                        <div class="job-tags">
-                            <span class="tag">Scalability</span>
-                            <span class="tag">Databases</span>
-                            <span class="tag">Caching</span>
-                        </div>
-                        <div class="job-footer">
-                            <span class="posted-time">1,800+ completed</span>
-                            <div class="button-group">
-                                <button class="apply-btn">Start Practice</button>
-                                <button class="view-details-btn">View Topics</button>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h3>Type "Go" to Start</h3>
+                                    <p>Simply type <strong>"go"</strong> to activate the AI interviewer and begin your practice session.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h3>Choose Your Path</h3>
+                                    <p>Select between <strong>Random Topics</strong> (mixed questions) or <strong>Single Topic</strong> (focused practice on SQL, Python, AI, etc.)</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <h3>Answer Questions</h3>
+                                    <p>For single topics, you'll get 5 random questions from our RAG knowledge base. Answer each question to the best of your ability.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    <h3>Get AI Feedback</h3>
+                                    <p>Receive instant AI-powered evaluation on your answers with detailed feedback and scoring.</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">6</div>
+                                <div class="step-content">
+                                    <h3>Track Your Progress</h3>
+                                    <p>View your proficiency per topic in the Dashboard with interactive graphs showing your improvement over time.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Interview Card 3 -->
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-left">
-                                <div class="company-avatar" style="background: #f59e0b;"><i class="fas fa-comments"></i></div>
-                                <div class="job-info">
-                                    <h3>Behavioral Interviews</h3>
-                                    <div class="company-location">Behavioral • 60 Questions</div>
-                                    <div class="salary">All Levels</div>
-                                </div>
+                    <!-- Features Grid -->
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                                <i class="fas fa-brain"></i>
                             </div>
+                            <h3>AI-Powered Evaluation</h3>
+                            <p>Advanced AI analyzes your responses and provides constructive feedback</p>
                         </div>
-                        <div class="job-description">
-                            Practice answering behavioral questions using the STAR method. Cover leadership, teamwork, conflict resolution, and problem-solving scenarios.
-                        </div>
-                        <div class="job-tags">
-                            <span class="tag">STAR Method</span>
-                            <span class="tag">Leadership</span>
-                            <span class="tag">Teamwork</span>
-                        </div>
-                        <div class="job-footer">
-                            <span class="posted-time">2,500+ completed</span>
-                            <div class="button-group">
-                                <button class="apply-btn">Start Practice</button>
-                                <button class="view-details-btn">View Topics</button>
+                        <div class="feature-card">
+                            <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                <i class="fas fa-chart-line"></i>
                             </div>
+                            <h3>Progress Tracking</h3>
+                            <p>Monitor your proficiency across topics with detailed analytics</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>RAG Knowledge Base</h3>
+                            <p>Questions are dynamically selected from our extensive database</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h3>Performance Metrics</h3>
+                            <p>Detailed scoring and history tracking for continuous improvement</p>
                         </div>
                     </div>
 
-                    <!-- Interview Card 4 -->
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-left">
-                                <div class="company-avatar" style="background: #8b5cf6;"><i class="fas fa-database"></i></div>
-                                <div class="job-info">
-                                    <h3>Database & SQL</h3>
-                                    <div class="company-location">Technical • 50 Questions</div>
-                                    <div class="salary">Beginner to Advanced</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="job-description">
-                            Master SQL queries, joins, indexing, normalization, transactions, and database optimization. Practice complex queries for data-focused roles.
-                        </div>
-                        <div class="job-tags">
-                            <span class="tag">SQL</span>
-                            <span class="tag">Joins</span>
-                            <span class="tag">Indexing</span>
-                            <span class="tag">NoSQL</span>
-                        </div>
-                        <div class="job-footer">
-                            <span class="posted-time">1,950+ completed</span>
-                            <div class="button-group">
-                                <button class="apply-btn">Start Practice</button>
-                                <button class="view-details-btn">View Topics</button>
-                            </div>
+                    <!-- CTA Section -->
+                    <div class="cta-section">
+                        <div class="cta-content">
+                            <h2>Ready to Practice?</h2>
+                            <p>Start your AI-powered interview session now and take your skills to the next level</p>
+                            <a href="{% url 'interviews:start_interview' %}" class="cta-button">
+                                <i class="fas fa-play-circle"></i>
+                                Start AI Interview
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Interview Card 5 -->
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-left">
-                                <div class="company-avatar" style="background: #ec4899;"><i class="fas fa-laptop-code"></i></div>
-                                <div class="job-info">
-                                    <h3>Object-Oriented Programming</h3>
-                                    <div class="company-location">Technical • 40 Questions</div>
-                                    <div class="salary">Intermediate Level</div>
-                                </div>
+                    <!-- Available Topics Preview -->
+                    <div class="topics-preview-card">
+                        <h2 class="section-title">
+                            <i class="fas fa-layer-group"></i>
+                            Available Topics for Single-Topic Practice
+                        </h2>
+                        <div class="topics-grid">
+                            <div class="topic-badge">
+                                <i class="fas fa-database"></i>
+                                <span>SQL Database</span>
+                            </div>
+                            <div class="topic-badge">
+                                <i class="fab fa-python"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="topic-badge">
+                                <i class="fas fa-brain"></i>
+                                <span>AI & ML</span>
+                            </div>
+                            <div class="topic-badge">
+                                <i class="fab fa-js"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="topic-badge">
+                                <i class="fas fa-code"></i>
+                                <span>Algorithms</span>
+                            </div>
+                            <div class="topic-badge">
+                                <i class="fas fa-project-diagram"></i>
+                                <span>System Design</span>
+                            </div>
+                            <div class="topic-badge">
+                                <i class="fab fa-java"></i>
+                                <span>Java</span>
+                            </div>
+                            <div class="topic-badge">
+                                <i class="fas fa-network-wired"></i>
+                                <span>Networking</span>
                             </div>
                         </div>
-                        <div class="job-description">
-                            Deep dive into OOP principles including encapsulation, inheritance, polymorphism, abstraction, and design patterns. Essential for software engineering roles.
-                        </div>
-                        <div class="job-tags">
-                            <span class="tag">SOLID</span>
-                            <span class="tag">Design Patterns</span>
-                            <span class="tag">Inheritance</span>
-                        </div>
-                        <div class="job-footer">
-                            <span class="posted-time">1,600+ completed</span>
-                            <div class="button-group">
-                                <button class="apply-btn">Start Practice</button>
-                                <button class="view-details-btn">View Topics</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Interview Card 6 -->
-                    <div class="job-card">
-                        <div class="job-header">
-                            <div class="job-left">
-                                <div class="company-avatar" style="background: #06b6d4;"><i class="fas fa-network-wired"></i></div>
-                                <div class="job-info">
-                                    <h3>Operating Systems & Networks</h3>
-                                    <div class="company-location">Technical • 35 Questions</div>
-                                    <div class="salary">Intermediate Level</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="job-description">
-                            Cover process management, memory management, threads, networking protocols, TCP/IP, HTTP/HTTPS, and system architecture fundamentals.
-                        </div>
-                        <div class="job-tags">
-                            <span class="tag">OS Concepts</span>
-                            <span class="tag">Networking</span>
-                            <span class="tag">TCP/IP</span>
-                        </div>
-                        <div class="job-footer">
-                            <span class="posted-time">1,400+ completed</span>
-                            <div class="button-group">
-                                <button class="apply-btn">Start Practice</button>
-                                <button class="view-details-btn">View Topics</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="load-more">
-                        <button class="load-more-btn">Load More Subjects</button>
+                        <p class="topics-note">
+                            <i class="fas fa-info-circle"></i>
+                            You'll be able to select any of these topics during your AI interview session
+                        </p>
                     </div>
                 </div>
 
@@ -974,24 +1004,45 @@
                         <h3>Popular Topics</h3>
                         <div class="company-list">
                             <div class="company-item">
-                                <div class="avatar" style="background: #2563eb;"><i class="fas fa-code" style="font-size: 14px;"></i></div>
+                                <div class="avatar" style="background: #2563eb;"><i class="fas fa-database" style="font-size: 14px;"></i></div>
                                 <div class="company-details">
-                                    <div class="name">Algorithms</div>
-                                    <div class="jobs">120 Questions</div>
+                                    <div class="name">SQL Database</div>
+                                    <div class="jobs">25 Questions</div>
                                 </div>
                             </div>
                             <div class="company-item">
-                                <div class="avatar" style="background: #10b981;"><i class="fas fa-brain" style="font-size: 14px;"></i></div>
+                                <div class="avatar" style="background: #10b981;"><i class="fab fa-python" style="font-size: 14px;"></i></div>
                                 <div class="company-details">
-                                    <div class="name">Problem Solving</div>
-                                    <div class="jobs">85 Questions</div>
+                                    <div class="name">Python</div>
+                                    <div class="jobs">30 Questions</div>
                                 </div>
                             </div>
                             <div class="company-item">
-                                <div class="avatar" style="background: #f59e0b;"><i class="fas fa-layer-group" style="font-size: 14px;"></i></div>
+                                <div class="avatar" style="background: #f59e0b;"><i class="fas fa-brain" style="font-size: 14px;"></i></div>
                                 <div class="company-details">
-                                    <div class="name">Design Patterns</div>
-                                    <div class="jobs">60 Questions</div>
+                                    <div class="name">AI & ML</div>
+                                    <div class="jobs">20 Questions</div>
+                                </div>
+                            </div>
+                            <div class="company-item">
+                                <div class="avatar" style="background: #8b5cf6;"><i class="fab fa-js" style="font-size: 14px;"></i></div>
+                                <div class="company-details">
+                                    <div class="name">JavaScript</div>
+                                    <div class="jobs">28 Questions</div>
+                                </div>
+                            </div>
+                            <div class="company-item">
+                                <div class="avatar" style="background: #ec4899;"><i class="fas fa-code" style="font-size: 14px;"></i></div>
+                                <div class="company-details">
+                                    <div class="name">DSA</div>
+                                    <div class="jobs">35 Questions</div>
+                                </div>
+                            </div>
+                            <div class="company-item">
+                                <div class="avatar" style="background: #06b6d4;"><i class="fas fa-project-diagram" style="font-size: 14px;"></i></div>
+                                <div class="company-details">
+                                    <div class="name">System Design</div>
+                                    <div class="jobs">22 Questions</div>
                                 </div>
                             </div>
                         </div>
